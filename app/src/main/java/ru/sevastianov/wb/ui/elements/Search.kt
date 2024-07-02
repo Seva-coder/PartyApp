@@ -21,7 +21,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
@@ -54,7 +53,7 @@ fun Search(
             ) {
                 Icon(
                     modifier = Modifier
-                        .padding(start = 10.dp, end = 10.dp)
+                        .padding(horizontal = 10.dp)
                         .size(24.dp),
                     imageVector = Icons.Rounded.Search,
                     contentDescription = "Search Icon",

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -42,7 +41,8 @@ fun UserAvatar(id: Int?,
         Modifier
             .fillMaxSize()
             .background(Color.Transparent)
-            .clip(CircleShape)
+            .offset(x = xOffset)
+            .clip(RoundedCornerShape(16.dp))
     }
 
     Box(modifier = Modifier
@@ -60,16 +60,19 @@ fun UserAvatar(id: Int?,
                 val canvasWidth = size.width
                 val canvasHeight = size.height
 
+                val xPos = 0.9f*canvasWidth
+                val yPos = 0.1f*canvasHeight
+
                 drawCircle(
                     color = Color.White,
                     radius = 8.dp.toPx(),
-                    center = Offset(0.85f*canvasWidth, 0.15f*canvasHeight)
+                    center = Offset(xPos, yPos)
                 )
 
                 drawCircle(
                     color = statusColor,
                     radius =  6.dp.toPx(),
-                    center = Offset(0.85f*canvasWidth, 0.15f*canvasHeight)
+                    center = Offset(xPos, yPos)
                 )
             }
         }

@@ -15,11 +15,13 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
+import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun GroupCard(imageId: Int, groupName: String, numberPerson: String) {
+fun GroupCard(imageId: Int, groupName: String, numberPerson: Int) {
 
     Row {
         Column(modifier = Modifier
@@ -41,14 +43,13 @@ fun GroupCard(imageId: Int, groupName: String, numberPerson: String) {
             Text(text = groupName,
                 style = PartyAppTheme.typography.bodyText1,
                 color = PartyAppTheme.colors.darkTextColor,
-                modifier = Modifier
-                    .padding(vertical = 0.dp)
             )
-            Text(text = numberPerson,
+            Text(
+                text = pluralStringResource(
+                    id = R.plurals.people_plurals,
+                    count = numberPerson, numberPerson),
                 style = PartyAppTheme.typography.metadata1,
                 color = PartyAppTheme.colors.greyTextColor2,
-                modifier = Modifier
-                    .padding(vertical = 0.dp)
             )
         }
     }

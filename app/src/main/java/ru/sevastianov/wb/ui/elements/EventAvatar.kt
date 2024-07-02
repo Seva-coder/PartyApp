@@ -19,8 +19,8 @@ fun EventAvatar(id: Int) {
         contentDescription = "meeting",
         contentScale = ContentScale.Crop,
         modifier = Modifier
-            .size(56.dp)
-            .clip(RoundedCornerShape(26.dp))
+            .size(48.dp)
+            .clip(RoundedCornerShape(16.dp))
             .background(PartyAppTheme.colors.background)
     )
 }

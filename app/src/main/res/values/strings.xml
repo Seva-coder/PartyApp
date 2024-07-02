@@ -1,4 +1,14 @@
 <resources>
     <string name="app_name">PartyApp</string>
     <string name="title_activity_2">Activity2</string>
+
+    <plurals name="people_plurals">
+        <item quantity="zero">%1$d человек</item>
+        <item quantity="one">%1$d человек</item>
+        <item quantity="two">%1$d человека</item>
+        <item quantity="few">%1$d человека</item>
+        <item quantity="many">%1$d человек</item>
+        <item quantity="other">%1$d человек</item>
+    </plurals>
+
 </resources>

@@ -4,7 +4,7 @@ package ru.sevastianov.wb.ui.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -27,26 +27,24 @@ fun MyEventsScreen() {
         TabRow(
             selectedTabIndex = tabIndex,
             indicator = { tabPositions ->
-                if (tabIndex < tabPositions.size) {
-                    TabRowDefaults.Indicator(
-                        modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex]),
-                        color = PartyAppTheme.colors.initialColor
-                    )
-                }
+                SecondaryIndicator(
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex]),
+                    color = PartyAppTheme.colors.initialColor
+                )
             },
         ) {
             Tab(selected = tabIndex == 0,
                 onClick = { tabIndex = 0 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text("ВСЕ ВСТРЕЧИ", fontSize = 18.sp) }
+                text = { Text("Все встречи".uppercase(), fontSize = 14.sp) }
             )
 
             Tab(selected = tabIndex == 1,
                 onClick = { tabIndex = 1 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text("АКТИВНЫЕ", fontSize = 18.sp) }
+                text = { Text("Активные".uppercase(), fontSize = 14.sp) }
             )
         }
 

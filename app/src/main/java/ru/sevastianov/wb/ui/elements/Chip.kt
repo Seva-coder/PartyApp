@@ -1,9 +1,11 @@
 package ru.sevastianov.wb.ui.elements
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.SuggestionChip
 import androidx.compose.material3.SuggestionChipDefaults
+import androidx.compose.material3.SuggestionChipDefaults.suggestionChipBorder
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,10 +26,9 @@ fun Chip(text: String) {
             containerColor = PartyAppTheme.colors.borderColor,
             labelColor = PartyAppTheme.colors.hoverColor
         ),
-        border = SuggestionChipDefaults.suggestionChipBorder(
-            borderColor = PartyAppTheme.colors.borderColor
-        ),
+        border = suggestionChipBorder(enabled = true, borderColor = PartyAppTheme.colors.borderColor),
         modifier = Modifier
+            .height(40.dp)
             .padding(horizontal = 2.dp, vertical = 8.dp),
 
     )

@@ -115,34 +115,47 @@ fun ShowScreen(navController: NavHostController) {
 
         SomeAvatars(
             ids = listOf(
-                R.drawable.ava_main,
-                R.drawable.ava_main,
+                R.drawable.logo2,
+                R.drawable.logo2,
                 R.drawable.dog,
                 R.drawable.dog,
-                R.drawable.ava_main,
+                R.drawable.logo2,
                 R.drawable.dog,
                 R.drawable.dog,
-                R.drawable.ava_main,
-                R.drawable.ava_main
+                R.drawable.logo2,
+                R.drawable.logo2
             )
         )
 
         UserAvatar(id = R.drawable.dog, online = true)
+        UserAvatar(id = R.drawable.logo2, online = true)
 
         GroupCard(
             imageId = R.drawable.dog,
             groupName = "Имя группы",
-            numberPerson = "15 чел"
+            numberPerson = 0
+        )
+        GroupCard(
+            imageId = R.drawable.dog,
+            groupName = "Имя группы",
+            numberPerson = 1
+        )
+        GroupCard(
+            imageId = R.drawable.dog,
+            groupName = "Имя группы",
+            numberPerson = 102
         )
 
         Row {
             ShowAvatar(imageId = null, changeAva = true, onClick = { })
             ShowAvatar(imageId = R.drawable.dog, changeAva = false, onClick = { })
-            ShowAvatar(
-                imageId = R.drawable.logo_test,
-                changeAva = true,
-                onClick = { }
-            )
+
         }
+        ShowAvatar(
+            imageId = R.drawable.logo_test,
+            changeAva = true,
+            onClick = { }
+        )
+
     }
 }

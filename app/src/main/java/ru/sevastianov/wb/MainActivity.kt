@@ -3,20 +3,8 @@ package ru.sevastianov.wb
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalAbsoluteTonalElevation
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.surfaceColorAtElevation
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -26,7 +14,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import ru.sevastianov.wb.ui.elements.BottomNavItem
-import ru.sevastianov.wb.ui.elements.BarIcon
+import ru.sevastianov.wb.ui.elements.NavBar
 import ru.sevastianov.wb.ui.screens.EventsScreen
 import ru.sevastianov.wb.ui.screens.MyEventsScreen
 import ru.sevastianov.wb.ui.screens.ProfileScreen
@@ -55,62 +43,36 @@ class MainActivity : ComponentActivity() {
                         icon = ImageVector.vectorResource(id = R.drawable.other_bar_icon)
                     )
                 )
-                var selectedItemIndex by rememberSaveable {
-                    mutableIntStateOf(0)
-                }
+
                 val navController = rememberNavController()
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = PartyAppTheme.colors.background
-                ) {
 
-                    Scaffold(
-                        bottomBar = {
-                            NavigationBar(modifier = Modifier.height(60.dp)) {
-                                listNavItems.forEachIndexed { index, item ->
-                                    NavigationBarItem(
-                                        colors = androidx.compose.material3.NavigationBarItemDefaults
-                                            .colors(
-                                                indicatorColor = MaterialTheme.colorScheme.surfaceColorAtElevation(LocalAbsoluteTonalElevation.current)
-                                            ),
-                                        selected = selectedItemIndex == index,
-                                        onClick = {
-                                            selectedItemIndex = index
-                                            navController.navigate(item.route)
-                                        },
-                                        icon = { BarIcon(
-                                            imageVector = item.icon,
-                                            text = item.name,
-                                            activeNow = selectedItemIndex == index
-                                        )}
-                                    )
-                                }
-                            }
+                Scaffold(
+                    containerColor = PartyAppTheme.colors.background,
+                    bottomBar = { NavBar(listNavItems = listNavItems, navController = navController) },
+                ) { paddings ->
+                    NavHost(
+                        navController = navController,
+                        startDestination = MyEventsScr,
+                        Modifier.padding(bottom = paddings.calculateBottomPadding(), start = 16.dp, end = 16.dp)
+                    ) {
+                        composable<EventsScr> {
+                            EventsScreen()
                         }
-                    ) { paddings ->
-                        NavHost(navController = navController,
-                            startDestination = MyEventsScr,
-                            Modifier.padding(paddings)
-                        ) {
-                            composable<EventsScr> {
-                                EventsScreen()
-                            }
 
-                            composable<ShowScr> {
-                                ShowScreen(navController)
-                            }
+                        composable<ShowScr> {
+                            ShowScreen(navController)
+                        }
 
-                            composable<MyEventsScr> {
-                                MyEventsScreen()
-                            }
+                        composable<MyEventsScr> {
+                            MyEventsScreen()
+                        }
 
-                            composable<ProfileScr> {
-                                ProfileScreen()
-                            }
+                        composable<ProfileScr> {
+                            ProfileScreen()
                         }
                     }
-
                 }
+
             }
         }
     }

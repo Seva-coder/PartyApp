@@ -25,7 +25,7 @@ val btnModifier = Modifier
     .height(52.dp)
 
 @Composable
-fun MainBtn(text: String, isEnabled: Boolean, onClick: () -> Unit) {
+fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -52,7 +52,6 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
         ),
         border = if (isEnabled) BorderStroke(2.dp, PartyAppTheme.colors.initialColor) else BorderStroke(2.dp, PartyAppTheme.colors.initialDisColor),
         modifier = btnModifier
-            //.widthIn(min = 85.dp)
             .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
@@ -61,7 +60,7 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
                 Icon(painter = painterResource(iconId),
                     contentDescription = "icon")
             }
-            if (text != "") {
+            if (text.isNotBlank()) {
                 Text(text = text)
             }
 
@@ -70,7 +69,7 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
 }
 
 @Composable
-fun MainTextBtn(text: String, isEnabled: Boolean) {
+fun MainTextBtn(text: String = "", isEnabled: Boolean = true) {
     TextButton(onClick = {  },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
@@ -86,7 +85,7 @@ fun MainTextBtn(text: String, isEnabled: Boolean) {
 }
 
 @Composable
-fun HoverBtn(text: String) {
+fun HoverBtn(text: String = "") {
     Button(onClick = {  },
         colors = ButtonDefaults.buttonColors(
             containerColor = PartyAppTheme.colors.hoverColor
@@ -98,7 +97,7 @@ fun HoverBtn(text: String) {
 }
 
 @Composable
-fun HoverOutlinedBtn(text: String) {
+fun HoverOutlinedBtn(text: String = "") {
     OutlinedButton(onClick = {  },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
@@ -112,7 +111,7 @@ fun HoverOutlinedBtn(text: String) {
 }
 
 @Composable
-fun HoverTextBtn(text: String) {
+fun HoverTextBtn(text: String = "") {
     TextButton(onClick = {  },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
