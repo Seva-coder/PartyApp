@@ -24,6 +24,8 @@ fun MyEventsScreen() {
     var tabIndex by remember { mutableIntStateOf(0) }
 
     Column() {
+        Search(onSearch = { })
+
         TabRow(
             selectedTabIndex = tabIndex,
             indicator = { tabPositions ->
@@ -32,6 +34,7 @@ fun MyEventsScreen() {
                     color = PartyAppTheme.colors.initialColor
                 )
             },
+            divider = { }
         ) {
             Tab(selected = tabIndex == 0,
                 onClick = { tabIndex = 0 },
@@ -47,8 +50,6 @@ fun MyEventsScreen() {
                 text = { Text("Активные".uppercase(), fontSize = 14.sp) }
             )
         }
-
-        Search(onSearch = { })
 
         when (tabIndex) {
             0 -> MyEventsList()

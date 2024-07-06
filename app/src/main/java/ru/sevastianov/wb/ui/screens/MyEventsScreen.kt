@@ -31,6 +31,7 @@ fun EventsScreen() {
                     color = PartyAppTheme.colors.initialColor
                 )
             },
+            divider = { }
         ) {
             Tab(selected = tabIndex == 0,
                 onClick = { tabIndex = 0 },
