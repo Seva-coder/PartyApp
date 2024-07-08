@@ -13,23 +13,22 @@ import ru.sevastianov.wb.ui.theme.PartyAppTheme
 import ru.sevastianov.wb.ui.theme.sfProFamily
 
 @Composable
-fun SomeAvatars(ids: List<Int>) {
+fun SomeAvatars(urls: List<String?>, modifier: Modifier = Modifier) {
     val step = 35
     val maxAvatars = 5
 
-    Box {
-        val avaToDisplay = ids.take(maxAvatars).reversed()
+    Box(modifier = modifier) {
+        val avaToDisplay = urls.take(maxAvatars).reversed()
         val maxOffset = (avaToDisplay.size - 1) * step
-        for (i in avaToDisplay.indices) {
-            val id = avaToDisplay[i]
-            UserAvatar(id = id,
+        avaToDisplay.forEachIndexed { i, url ->
+            UserAvatar(urlImage = url,
                 online = false,
                 drawBorder = true,
                 xOffset = (maxOffset - i * step).dp
             )
         }
-        if (ids.size > maxAvatars) {
-            val plusText = ids.size - maxAvatars
+        if (urls.size > maxAvatars) {
+            val plusText = urls.size - maxAvatars
             Text(text = "+$plusText",
                 fontSize = 14.sp,
                 color = PartyAppTheme.colors.darkTextColor,

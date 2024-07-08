@@ -14,13 +14,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import ru.sevastianov.wb.ui.elements.MyPrevEventsList
 import ru.sevastianov.wb.ui.elements.MyEventsList
 import ru.sevastianov.wb.ui.elements.Search
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun MyEventsScreen() {
+fun MyEventsScreen(navController: NavController) {
     var tabIndex by remember { mutableIntStateOf(0) }
 
     Column() {
@@ -52,7 +53,7 @@ fun MyEventsScreen() {
         }
 
         when (tabIndex) {
-            0 -> MyEventsList()
+            0 -> MyEventsList(navController = navController)
             1 -> MyPrevEventsList()
         }
     }

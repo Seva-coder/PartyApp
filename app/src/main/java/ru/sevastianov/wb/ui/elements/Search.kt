@@ -64,7 +64,7 @@ fun Search(
                     .align(Alignment.CenterVertically)
                 ) {
                     if (state.text.isEmpty()) {
-                        Text(text = "BasicTextField 2->1",
+                        Text(text = "Поиск",
                             style = PartyAppTheme.typography.bodyText1,
                             color = PartyAppTheme.colors.greyTextColor2,
                             modifier = Modifier.align(Alignment.CenterStart)

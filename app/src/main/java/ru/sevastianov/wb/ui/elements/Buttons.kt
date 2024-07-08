@@ -25,7 +25,7 @@ val btnModifier = Modifier
     .height(52.dp)
 
 @Composable
-fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
+fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit, modifier: Modifier = Modifier) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -33,7 +33,10 @@ fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
             disabledContainerColor = PartyAppTheme.colors.initialDisColor,
             disabledContentColor = PartyAppTheme.colors.neutralWhite
         ),
-        modifier = btnModifier.alpha(if (isEnabled) 1.0f else 0.5f),
+        modifier = modifier
+            .widthIn(min = 85.dp)
+            .height(52.dp)
+            .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
         Text(text = text)
@@ -43,22 +46,28 @@ fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
 
 @Composable
 fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = null) {
-    OutlinedButton(onClick = {  },
+    OutlinedButton(
+        onClick = { },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.primary,
             disabledContainerColor = Color.Transparent,
             disabledContentColor = PartyAppTheme.colors.initialDisColor
         ),
-        border = if (isEnabled) BorderStroke(2.dp, PartyAppTheme.colors.initialColor) else BorderStroke(2.dp, PartyAppTheme.colors.initialDisColor),
+        border = if (isEnabled) BorderStroke(
+            2.dp,
+            PartyAppTheme.colors.initialColor
+        ) else BorderStroke(2.dp, PartyAppTheme.colors.initialDisColor),
         modifier = btnModifier
             .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
         Row {
             iconId?.let {
-                Icon(painter = painterResource(iconId),
-                    contentDescription = "icon")
+                Icon(
+                    painter = painterResource(iconId),
+                    contentDescription = "icon"
+                )
             }
             if (text.isNotBlank()) {
                 Text(text = text)
@@ -70,7 +79,8 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
 
 @Composable
 fun MainTextBtn(text: String = "", isEnabled: Boolean = true) {
-    TextButton(onClick = {  },
+    TextButton(
+        onClick = { },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.primary,
@@ -86,7 +96,8 @@ fun MainTextBtn(text: String = "", isEnabled: Boolean = true) {
 
 @Composable
 fun HoverBtn(text: String = "") {
-    Button(onClick = {  },
+    Button(
+        onClick = { },
         colors = ButtonDefaults.buttonColors(
             containerColor = PartyAppTheme.colors.hoverColor
         ),
@@ -98,7 +109,8 @@ fun HoverBtn(text: String = "") {
 
 @Composable
 fun HoverOutlinedBtn(text: String = "") {
-    OutlinedButton(onClick = {  },
+    OutlinedButton(
+        onClick = { },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = PartyAppTheme.colors.hoverColor
@@ -112,7 +124,8 @@ fun HoverOutlinedBtn(text: String = "") {
 
 @Composable
 fun HoverTextBtn(text: String = "") {
-    TextButton(onClick = {  },
+    TextButton(
+        onClick = { },
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = PartyAppTheme.colors.hoverColor

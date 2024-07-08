@@ -1,7 +1,7 @@
 package ru.sevastianov.wb.ui.elements
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -14,21 +14,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun GroupCard(imageId: Int, groupName: String, numberPerson: Int) {
+fun GroupCard(urlImage: String, groupName: String, numberPerson: Int, groupId: Long, onClick: (Long) -> Unit) {
 
-    Row {
+    Row(modifier = Modifier.clickable { onClick(groupId) }) {
         Column(modifier = Modifier
             .padding(end = 20.dp)
         ) {
-            Image(
-                painter = painterResource(imageId),
+            AsyncImage(
+                model = urlImage,
                 contentDescription = "group image",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

@@ -1,19 +1,25 @@
-package ru.sevastianov.wb.ui.elements
+package ru.sevastianov.wb.ui.screens
+
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.Composable
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import ru.sevastianov.wb.Screen
+import ru.sevastianov.wb.ui.elements.EventCard
+import ru.sevastianov.wb.ui.elements.Meeting
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun MyEventsList(navController: NavController) {
+fun GroupDetailScreen(groupId: Long, navController: NavController) {
+
     val meeting = Meeting(
         name = "Developer meeting",
         place = "13.09.2024 - Москва",
@@ -21,10 +27,28 @@ fun MyEventsList(navController: NavController) {
         tags = listOf("Python", "Junior", "Moscow")
     )
     val list = List(5) { meeting }
+
+    val text = LoremIpsum(100).values.joinToString(separator = " ")
+
     LazyColumn {
+        item {
+            Text(
+                text = text,
+                style = PartyAppTheme.typography.metadata1,
+                color = PartyAppTheme.colors.greyTextColor
+            )
+            Spacer(modifier = Modifier.height(20.dp))
+            Text(
+                text = "Встречи сообщества",
+                style = PartyAppTheme.typography.bodyText1,
+                color = PartyAppTheme.colors.greyTextColor
+            )
+        }
+
         itemsIndexed(list) { index, meeting ->
             Spacer(modifier = Modifier.height(20.dp))
-            EventCard(imageUrl = meeting.imageUrl,
+            EventCard(
+                imageUrl = meeting.imageUrl,
                 title = meeting.name,
                 dateWithPlace = meeting.place,
                 tags = meeting.tags,
@@ -40,7 +64,7 @@ fun MyEventsList(navController: NavController) {
                 HorizontalDivider(color = PartyAppTheme.colors.dividerColor)
             }
         }
-    }
-}
 
-data class Meeting(val name: String, val place: String, val imageUrl: String, val tags: List<String>)
+    }
+
+}

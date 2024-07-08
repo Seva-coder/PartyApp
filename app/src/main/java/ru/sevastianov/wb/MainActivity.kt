@@ -22,7 +22,10 @@ import ru.sevastianov.wb.ui.elements.BottomNavItem
 import ru.sevastianov.wb.ui.elements.NavBar
 import ru.sevastianov.wb.ui.elements.RightButton
 import ru.sevastianov.wb.ui.elements.TopBar
+import ru.sevastianov.wb.ui.screens.GroupDetailScreen
+import ru.sevastianov.wb.ui.screens.EventDetailScreen
 import ru.sevastianov.wb.ui.screens.EventsScreen
+import ru.sevastianov.wb.ui.screens.GroupsScreen
 import ru.sevastianov.wb.ui.screens.MyEventsScreen
 import ru.sevastianov.wb.ui.screens.ProfileScreen
 import ru.sevastianov.wb.ui.screens.ShowScreen
@@ -36,17 +39,17 @@ class MainActivity : ComponentActivity() {
                 val listNavItems = listOf(
                     BottomNavItem(
                         name = "Встречи",
-                        route = MyEventsScr,
+                        route = Screen.MyEventsScr,
                         icon = ImageVector.vectorResource(id = R.drawable.meeting_bar_icon)
                     ),
                     BottomNavItem(
-                        name = "Группы",
-                        route = ShowScr,
+                        name = "Сообщества",
+                        route = Screen.GroupsScr,
                         icon = ImageVector.vectorResource(id = R.drawable.group_bar_icon)
                     ),
                     BottomNavItem(
                         name = "Ещё",
-                        route = EventsScr,
+                        route = Screen.EventsScr,
                         icon = ImageVector.vectorResource(id = R.drawable.other_bar_icon)
                     )
                 )
@@ -69,43 +72,68 @@ class MainActivity : ComponentActivity() {
                 ) { paddings ->
                     NavHost(
                         navController = navController,
-                        startDestination = MyEventsScr,
+                        startDestination = Screen.MyEventsScr,
                         Modifier.padding(
                             top = paddings.calculateTopPadding(),
                             bottom = paddings.calculateBottomPadding(),
                             start = 16.dp, end = 16.dp)
                     ) {
-                        composable<EventsScr> { entry ->
-                            val scr: EventsScr = entry.toRoute()
+                        composable<Screen.EventsScr> { entry ->
+                            val scr: Screen.EventsScr = entry.toRoute()
                             title = scr.name
                             isRootScreen = scr.isRoot
                             rTopButton = scr.rightButtonType
-                            EventsScreen()
+                            EventsScreen(navController = navController)
                         }
 
-                        composable<ShowScr> { entry ->
-                            val scr: ShowScr = entry.toRoute()
+                        composable<Screen.ShowScr> { entry ->
+                            val scr: Screen.ShowScr = entry.toRoute()
                             title = scr.name
                             isRootScreen = scr.isRoot
                             rTopButton = scr.rightButtonType
                             ShowScreen(navController)
                         }
 
-                        composable<MyEventsScr> { entry ->
-                            val scr: MyEventsScr = entry.toRoute()
+                        composable<Screen.MyEventsScr> { entry ->
+                            val scr: Screen.MyEventsScr = entry.toRoute()
                             title = scr.name
                             isRootScreen = scr.isRoot
                             rTopButton = scr.rightButtonType
-                            MyEventsScreen()
+                            MyEventsScreen(navController = navController)
                         }
 
-                        composable<ProfileScr> { entry ->
-                            val scr: ProfileScr = entry.toRoute()
+                        composable<Screen.ProfileScr> { entry ->
+                            val scr: Screen.ProfileScr = entry.toRoute()
                             title = scr.name
                             isRootScreen = scr.isRoot
                             rTopButton = scr.rightButtonType
                             ProfileScreen()
                         }
+
+                        composable<Screen.GroupsScr> { entry ->
+                            val scr: Screen.GroupsScr = entry.toRoute()
+                            title = scr.name
+                            isRootScreen = scr.isRoot
+                            rTopButton = scr.rightButtonType
+                            GroupsScreen(groupList = testGroups, navController = navController)
+                        }
+
+                        composable<Screen.GroupDetailScr> { entry ->
+                            val scr: Screen.GroupDetailScr = entry.toRoute()
+                            title = scr.name
+                            isRootScreen = scr.isRoot
+                            rTopButton = RightButton.NONE
+                            GroupDetailScreen(groupId = scr.groupId, navController = navController)
+                        }
+
+                        composable<Screen.EventDetailScr> { entry ->
+                            val scr: Screen.EventDetailScr = entry.toRoute()
+                            title = scr.name
+                            isRootScreen = scr.isRoot
+                            rTopButton = RightButton.NONE
+                            EventDetailScreen(eventId = scr.eventId)
+                        }
+
                     }
                 }
 
@@ -116,36 +144,55 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-interface Screen {
-    val name: String
-    val isRoot: Boolean
-    val rightButtonType: RightButton
-}
+sealed interface Screen {
 
-@Serializable
-data object ShowScr : Screen {
-    override val name = "Набор элементов"
-    override val isRoot = false
-    override val rightButtonType = RightButton.NONE
-}
+    @Serializable
+    data object ShowScr : Screen {
+        val name = "Набор элементов"
+        val isRoot = false
+        val rightButtonType = RightButton.NONE
+    }
 
-@Serializable
-data object EventsScr : Screen {
-    override val name = "Мои встречи"
-    override val isRoot = false
-    override val rightButtonType = RightButton.PLUS
-}
+    @Serializable
+    data object EventsScr : Screen {
+        val name = "Мои встречи"
+        val isRoot = false
+        val rightButtonType = RightButton.PLUS
+    }
 
-@Serializable
-data object MyEventsScr : Screen {
-    override val name = "Встречи"
-    override val isRoot = true
-    override val rightButtonType = RightButton.NONE
-}
+    @Serializable
+    data object MyEventsScr : Screen {
+        val name = "Встречи"
+        val isRoot = true
+        val rightButtonType = RightButton.NONE
+    }
 
-@Serializable
-data object ProfileScr : Screen {
-    override val name = "Профиль"
-    override val isRoot = false
-    override val rightButtonType = RightButton.EDIT
+    @Serializable
+    data object ProfileScr : Screen {
+        val name = "Профиль"
+        val isRoot = false
+        val rightButtonType = RightButton.EDIT
+    }
+
+    @Serializable
+    data object GroupsScr : Screen {
+        val name = "Сообщества"
+        val isRoot = false
+        val rightButtonType = RightButton.NONE
+    }
+
+    @Serializable
+    data class GroupDetailScr(val groupId: Long) : Screen {
+        val name = "Детали"
+        val isRoot = false
+        //val rightButtonType = RightButton.NONE  // не работает cast to NavType...
+    }
+
+    @Serializable
+    data class EventDetailScr(val eventId: Long) : Screen {
+        val name = "Developer meeting"
+        val isRoot = false
+        //val rightButtonType = RightButton.NONE  // не работает cast to NavType...
+    }
+
 }

@@ -1,6 +1,7 @@
 package ru.sevastianov.wb.ui.elements
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -16,15 +17,16 @@ import androidx.compose.ui.unit.dp
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun EventCard(imageId: Int, title: String, dateWithPlace: String, tags: List<String>, isEnded: Boolean) {
+fun EventCard(imageUrl: String, title: String, dateWithPlace: String, tags: List<String>, isEnded: Boolean,
+              eventId: Long, onClick: (Long) -> Unit) {
 
     val scrollState = rememberScrollState()
 
-    Row() {
+    Row(modifier = Modifier.clickable { onClick(eventId) }) {
         Column(modifier = Modifier
             .padding(end = 10.dp)
         ) {
-            EventAvatar(imageId)
+            EventAvatar(imageUrl)
         }
 
         Column {
