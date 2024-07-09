@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.compose.rememberNavController
 import kotlinx.serialization.Serializable
 import ru.sevastianov.wb.ui.elements.BottomNavItem
@@ -20,6 +21,7 @@ import ru.sevastianov.wb.ui.theme.PartyAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContent {
             PartyAppTheme {
                 val listNavItems = listOf(

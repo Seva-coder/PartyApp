@@ -71,4 +71,6 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.8.0-beta04")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("io.coil-kt:coil-compose:2.6.0")
+    implementation("androidx.core:core-splashscreen:1.0.1")
+
 }
