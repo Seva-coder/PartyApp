@@ -1,7 +1,6 @@
 package ru.sevastianov.wb.ui.elements
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -18,15 +17,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun UserAvatar(id: Int?,
+fun UserAvatar(urlImage: String?,
                online: Boolean,
                drawBorder: Boolean = false,
                xOffset: Dp = 0.dp) {
-    val id = id ?: R.drawable.ava_default
 
     val statusColor = PartyAppTheme.colors.statusColor
 
@@ -48,10 +47,11 @@ fun UserAvatar(id: Int?,
     Box(modifier = Modifier
         .size(56.dp)
     ) {
-        Image(
-            painter = painterResource(id),
+        AsyncImage(
+            model = urlImage,
             contentDescription = "avatar",
             contentScale = ContentScale.Fit,
+            placeholder = painterResource(id = R.drawable.ava_default),
             modifier = modifier
         )
 

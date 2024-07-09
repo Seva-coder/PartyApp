@@ -1,6 +1,7 @@
 package ru.sevastianov.wb.ui.elements
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -12,19 +13,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun EventCard(imageId: Int, title: String, dateWithPlace: String, tags: List<String>, isEnded: Boolean) {
+fun EventCard(imageUrl: String, title: String, dateWithPlace: String, tags: List<String>, isEnded: Boolean,
+              eventId: Long, onClick: (Long) -> Unit) {
 
     val scrollState = rememberScrollState()
 
-    Row() {
+    Row(modifier = Modifier.clickable { onClick(eventId) }) {
         Column(modifier = Modifier
             .padding(end = 10.dp)
         ) {
-            EventAvatar(imageId)
+            EventAvatar(imageUrl)
         }
 
         Column {
@@ -37,7 +41,7 @@ fun EventCard(imageId: Int, title: String, dateWithPlace: String, tags: List<Str
                     color = PartyAppTheme.colors.darkTextColor
                 )
                 if (isEnded) {
-                    Text(text = "Закончилась",
+                    Text(text = stringResource(R.string.ended_event_label),
                         style = PartyAppTheme.typography.metadata2,
                         color = PartyAppTheme.colors.greyTextColor,
                         modifier = Modifier
