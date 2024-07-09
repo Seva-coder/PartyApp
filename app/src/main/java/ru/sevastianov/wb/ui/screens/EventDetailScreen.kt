@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -36,7 +37,9 @@ fun EventDetailScreen(eventId: Long) {
 
     var showDialog by remember { mutableStateOf(false) }
 
-    LazyColumn() {
+    LazyColumn(modifier = Modifier
+        .padding(start = 16.dp, end = 16.dp)
+    ) {
         item {
             Text(
                 text = datePlace,
@@ -86,7 +89,7 @@ fun EventDetailScreen(eventId: Long) {
         }
         item {
             MainBtn(
-                text = "Пойду на встречу!", onClick = {},
+                text = stringResource(R.string.go_to_event_btn), onClick = {},
                 modifier = Modifier
                     .padding(vertical = 20.dp)
                     .fillMaxWidth()

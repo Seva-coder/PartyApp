@@ -3,6 +3,7 @@ package ru.sevastianov.wb.ui.screens
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
@@ -20,9 +21,11 @@ fun GroupsScreen(groupList: List<Group>, navController: NavController) {
     Column {
         Search(onSearch = {  })
 
-        LazyColumn {
+        LazyColumn(modifier = Modifier.padding(
+            start = 16.dp, end = 16.dp)
+        ) {
             itemsIndexed(groupList) { index, group ->
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 GroupCard(urlImage = group.imgUrl,
                     groupName = group.name,
                     numberPerson = group.numberPerson,
@@ -33,7 +36,7 @@ fun GroupsScreen(groupList: List<Group>, navController: NavController) {
                     }
                 }
                 if (index < groupList.lastIndex) {
-                    Spacer(modifier = Modifier.height(20.dp))
+                    Spacer(modifier = Modifier.height(8.dp))
                     HorizontalDivider(color = PartyAppTheme.colors.dividerColor)
                 }
             }

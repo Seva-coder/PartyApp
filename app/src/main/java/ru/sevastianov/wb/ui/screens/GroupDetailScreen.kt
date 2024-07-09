@@ -3,15 +3,18 @@ package ru.sevastianov.wb.ui.screens
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.EventCard
 import ru.sevastianov.wb.ui.elements.Meeting
@@ -30,7 +33,9 @@ fun GroupDetailScreen(groupId: Long, navController: NavController) {
 
     val text = LoremIpsum(100).values.joinToString(separator = " ")
 
-    LazyColumn {
+    LazyColumn(modifier = Modifier
+        .padding(start = 16.dp, end = 16.dp)
+    ) {
         item {
             Text(
                 text = text,
@@ -39,14 +44,14 @@ fun GroupDetailScreen(groupId: Long, navController: NavController) {
             )
             Spacer(modifier = Modifier.height(20.dp))
             Text(
-                text = "Встречи сообщества",
+                text = stringResource(R.string.events_of_group_text),
                 style = PartyAppTheme.typography.bodyText1,
                 color = PartyAppTheme.colors.greyTextColor
             )
         }
 
         itemsIndexed(list) { index, meeting ->
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             EventCard(
                 imageUrl = meeting.imageUrl,
                 title = meeting.name,
@@ -60,7 +65,7 @@ fun GroupDetailScreen(groupId: Long, navController: NavController) {
                 }
             }
             if (index < list.lastIndex) {
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 HorizontalDivider(color = PartyAppTheme.colors.dividerColor)
             }
         }

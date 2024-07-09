@@ -13,8 +13,10 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.MyPrevEventsList
 import ru.sevastianov.wb.ui.elements.MyEventsList
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
@@ -38,14 +40,14 @@ fun EventsScreen(navController: NavController) {
                 onClick = { tabIndex = 0 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text("Запланировано".uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.planned_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
 
             Tab(selected = tabIndex == 1,
                 onClick = { tabIndex = 1 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text("Уже прошли".uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.prev_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
 
         }

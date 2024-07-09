@@ -45,9 +45,9 @@ fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit, m
 
 
 @Composable
-fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = null) {
+fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = null, onClick: () -> Unit) {
     OutlinedButton(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.primary,
@@ -78,9 +78,9 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
 }
 
 @Composable
-fun MainTextBtn(text: String = "", isEnabled: Boolean = true) {
+fun MainTextBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
     TextButton(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = MaterialTheme.colorScheme.primary,
@@ -95,9 +95,9 @@ fun MainTextBtn(text: String = "", isEnabled: Boolean = true) {
 }
 
 @Composable
-fun HoverBtn(text: String = "") {
+fun HoverBtn(text: String = "", onClick: () -> Unit) {
     Button(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = PartyAppTheme.colors.hoverColor
         ),
@@ -108,9 +108,9 @@ fun HoverBtn(text: String = "") {
 }
 
 @Composable
-fun HoverOutlinedBtn(text: String = "") {
+fun HoverOutlinedBtn(text: String = "", onClick: () -> Unit) {
     OutlinedButton(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = PartyAppTheme.colors.hoverColor
@@ -123,9 +123,9 @@ fun HoverOutlinedBtn(text: String = "") {
 }
 
 @Composable
-fun HoverTextBtn(text: String = "") {
+fun HoverTextBtn(text: String = "", onClick: () -> Unit) {
     TextButton(
-        onClick = { },
+        onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.Transparent,
             contentColor = PartyAppTheme.colors.hoverColor

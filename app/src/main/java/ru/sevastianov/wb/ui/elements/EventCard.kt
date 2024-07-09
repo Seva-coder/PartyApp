@@ -13,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
@@ -39,7 +41,7 @@ fun EventCard(imageUrl: String, title: String, dateWithPlace: String, tags: List
                     color = PartyAppTheme.colors.darkTextColor
                 )
                 if (isEnded) {
-                    Text(text = "Закончилась",
+                    Text(text = stringResource(R.string.ended_event_label),
                         style = PartyAppTheme.typography.metadata2,
                         color = PartyAppTheme.colors.greyTextColor,
                         modifier = Modifier

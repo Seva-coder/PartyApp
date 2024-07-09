@@ -29,10 +29,10 @@ fun ProfileScreen() {
             horizontalArrangement = Arrangement.SpaceAround,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            MainOutlineBtn(iconId = R.drawable.twitter)
-            MainOutlineBtn(iconId = R.drawable.insta)
-            MainOutlineBtn(iconId = R.drawable.linked)
-            MainOutlineBtn(iconId = R.drawable.facebook)
+            MainOutlineBtn(iconId = R.drawable.twitter, onClick = {})
+            MainOutlineBtn(iconId = R.drawable.insta, onClick = {})
+            MainOutlineBtn(iconId = R.drawable.linked, onClick = {})
+            MainOutlineBtn(iconId = R.drawable.facebook, onClick = {})
         }
 
     }

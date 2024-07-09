@@ -2,6 +2,7 @@ package ru.sevastianov.wb.ui.elements
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -21,9 +22,11 @@ fun MyEventsList(navController: NavController) {
         tags = listOf("Python", "Junior", "Moscow")
     )
     val list = List(5) { meeting }
-    LazyColumn {
+    LazyColumn(modifier = Modifier
+        .padding(start = 16.dp, end = 16.dp)
+    ) {
         itemsIndexed(list) { index, meeting ->
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(8.dp))
             EventCard(imageUrl = meeting.imageUrl,
                 title = meeting.name,
                 dateWithPlace = meeting.place,
@@ -36,7 +39,7 @@ fun MyEventsList(navController: NavController) {
                 }
             }
             if (index < list.lastIndex) {
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(8.dp))
                 HorizontalDivider(color = PartyAppTheme.colors.dividerColor)
             }
         }

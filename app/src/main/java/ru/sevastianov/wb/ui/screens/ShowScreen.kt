@@ -52,8 +52,8 @@ fun ShowScreen(navController: NavHostController) {
                     launchSingleTop = true
                 }
             })
-            MainOutlineBtn(text = "out", isEnabled = true)
-            MainTextBtn(text = "text", isEnabled = true)
+            MainOutlineBtn(text = "out", isEnabled = true, onClick = {})
+            MainTextBtn(text = "text", isEnabled = true, onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
@@ -61,9 +61,9 @@ fun ShowScreen(navController: NavHostController) {
             modifier = rowModifier,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            HoverBtn(text = "main")
-            HoverOutlinedBtn(text = "out")
-            HoverTextBtn(text = "text")
+            HoverBtn(text = "main", onClick = {})
+            HoverOutlinedBtn(text = "out", onClick = {})
+            HoverTextBtn(text = "text", onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
@@ -72,8 +72,8 @@ fun ShowScreen(navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             MainBtn(text = "main", isEnabled = false, onClick = {  })
-            MainOutlineBtn(text = "out", isEnabled = false)
-            MainTextBtn(text = "text", isEnabled = false)
+            MainOutlineBtn(text = "out", isEnabled = false, onClick = {})
+            MainTextBtn(text = "text", isEnabled = false, onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
