@@ -107,7 +107,7 @@ fun PhoneInput(
                 Box(contentAlignment = Alignment.CenterStart,
                     modifier = Modifier
                         .align(Alignment.CenterVertically)
-                        .padding(horizontal = 3.dp)
+                        .padding(horizontal = 10.dp)
                 ) {
                     if (showHint) {
                         Text(text = "000 000-00-00",
@@ -116,9 +116,7 @@ fun PhoneInput(
                             modifier = Modifier.align(Alignment.CenterStart)
                         )
                     } else {
-                        Box(modifier = Modifier.padding(start = 10.dp)) {
-                            inputField()
-                        }
+                        inputField()
                     }
                 }
             }
