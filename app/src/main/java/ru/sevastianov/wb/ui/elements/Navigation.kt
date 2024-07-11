@@ -20,6 +20,7 @@ import ru.sevastianov.wb.ui.screens.ShowScreen
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
+import ru.sevastianov.wb.ui.screens.ShowCustomViews
 
 
 @Composable
@@ -56,7 +57,8 @@ fun Navigation(
             title.value = stringResource(R.string.events_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.NONE
-            MyEventsScreen(navController = navController)
+            //MyEventsScreen(navController = navController)
+            ShowCustomViews()
         }
 
         composable<Screen.ProfileScr> { entry ->
