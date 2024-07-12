@@ -10,3 +10,5 @@
 .cxx
 local.properties
 .idea
+/release/app-release.apk
+/release/output-metadata.json

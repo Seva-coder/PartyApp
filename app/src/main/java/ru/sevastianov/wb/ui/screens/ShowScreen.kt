@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import ru.sevastianov.wb.ProfileScr
 import ru.sevastianov.wb.R
+import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.Chip
 import ru.sevastianov.wb.ui.elements.EventAvatar
 import ru.sevastianov.wb.ui.elements.EventCard
@@ -46,14 +46,14 @@ fun ShowScreen(navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceAround,
         ) {
             MainBtn(text = "проф", isEnabled = true, onClick = {
-                val dest = ProfileScr
+                val dest = Screen.ProfileScr
                 navController.navigate(dest) {
                     popUpTo(dest)
                     launchSingleTop = true
                 }
             })
-            MainOutlineBtn(text = "out", isEnabled = true)
-            MainTextBtn(text = "text", isEnabled = true)
+            MainOutlineBtn(text = "out", isEnabled = true, onClick = {})
+            MainTextBtn(text = "text", isEnabled = true, onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
@@ -61,9 +61,9 @@ fun ShowScreen(navController: NavHostController) {
             modifier = rowModifier,
             horizontalArrangement = Arrangement.SpaceAround
         ) {
-            HoverBtn(text = "main")
-            HoverOutlinedBtn(text = "out")
-            HoverTextBtn(text = "text")
+            HoverBtn(text = "main", onClick = {})
+            HoverOutlinedBtn(text = "out", onClick = {})
+            HoverTextBtn(text = "text", onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
@@ -72,8 +72,8 @@ fun ShowScreen(navController: NavHostController) {
             horizontalArrangement = Arrangement.SpaceAround
         ) {
             MainBtn(text = "main", isEnabled = false, onClick = {  })
-            MainOutlineBtn(text = "out", isEnabled = false)
-            MainTextBtn(text = "text", isEnabled = false)
+            MainOutlineBtn(text = "out", isEnabled = false, onClick = {})
+            MainTextBtn(text = "text", isEnabled = false, onClick = {})
         }
         Spacer(modifier = Modifier.fillMaxWidth().height(8.dp))
 
@@ -82,8 +82,8 @@ fun ShowScreen(navController: NavHostController) {
 
         // Adding Avatars ////////////////////////////
         Row {
-            UserAvatar(id = R.drawable.dog, online = true)
-            EventAvatar(id = R.drawable.ava_main)
+            UserAvatar(urlImage = "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png", online = true)
+            EventAvatar(urlImage = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png")
         }
         // Adding 2 versions search bar ////////////////////////////
 
@@ -99,51 +99,59 @@ fun ShowScreen(navController: NavHostController) {
 
 
         EventCard(
-            imageId = R.drawable.logo_test,
+            imageUrl = "https://live.staticflickr.com/65535/53844006025_b8715cd329_o_d.png",
             title = "Фестиваль радиоэлектроники",
             dateWithPlace = "01.09.24 - Budva",
             tags = listOf("android", "kotlin"),
-            isEnded = false
-        )
+            isEnded = false,
+            eventId = 1L
+        ) {}
         EventCard(
-            imageId = R.drawable.ava_main,
+            imageUrl = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png",
             title = "Сходка",
             dateWithPlace = "01.01.24 - secret place",
             tags = listOf("sea", "mountains", "kotlin", "iOS", "long long TAG"),
-            isEnded = true
-        )
+            isEnded = true,
+            eventId = 1L
+        ) {}
 
         SomeAvatars(
-            ids = listOf(
-                R.drawable.logo2,
-                R.drawable.logo2,
-                R.drawable.dog,
-                R.drawable.dog,
-                R.drawable.logo2,
-                R.drawable.dog,
-                R.drawable.dog,
-                R.drawable.logo2,
-                R.drawable.logo2
+            urls = listOf(
+                "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
+                "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
+                "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
+                "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
+                "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
+                "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
+                "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
+                "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
+                "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg"
             )
         )
 
-        UserAvatar(id = R.drawable.dog, online = true)
-        UserAvatar(id = R.drawable.logo2, online = true)
+        UserAvatar(urlImage = "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png", online = true)
+        UserAvatar(urlImage = "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg", online = true)
 
         GroupCard(
-            imageId = R.drawable.dog,
+            urlImage = "https://slm-assets.secondlife.com/assets/3806158/view_large/512x512%20PNG%20Landscape%20Texture%20-%20Sunrise%20Lake.jpg?1309205114",
             groupName = "Имя группы",
-            numberPerson = 0
+            numberPerson = 0,
+            groupId = 1L,
+            onClick = { id ->  }
         )
         GroupCard(
-            imageId = R.drawable.dog,
+            urlImage = "https://slm-assets.secondlife.com/assets/3789225/lightbox/512x512%20PNG%20Landscape%20Texture%20-%20Country%20Lane.jpg?1308962600",
             groupName = "Имя группы",
-            numberPerson = 1
+            numberPerson = 1,
+            groupId = 1L,
+            onClick = { id ->  }
         )
         GroupCard(
-            imageId = R.drawable.dog,
-            groupName = "Имя группы",
-            numberPerson = 102
+            urlImage = "https://pngimg.com/uploads/linux/linux_PNG15.png",
+            groupName = "Linux",
+            numberPerson = 102,
+            groupId = 1L,
+            onClick = { id ->  }
         )
 
         Row {

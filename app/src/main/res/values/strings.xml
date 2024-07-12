@@ -1,6 +1,24 @@
 <resources>
     <string name="app_name">PartyApp</string>
     <string name="title_activity_2">Activity2</string>
+    <string name="events_tab_text">Встречи</string>
+    <string name="groups_tab_text">Сообщества</string>
+    <string name="other_tab_text">Ещё</string>
+    <string name="show_screen_title">Набор элементов</string>
+    <string name="my_events_screen_title">Мои встречи</string>
+    <string name="events_screen_title">Встречи</string>
+    <string name="profile_screen_title">Профиль</string>
+    <string name="groups_screen_title">Сообщества</string>
+    <string name="group_details_screen_title">Детали</string>
+    <string name="event_details_screen_title">Developer meeting</string>
+    <string name="ended_event_label">Закончилась</string>
+    <string name="search_hint">Поиск</string>
+    <string name="go_to_event_btn">Пойду на встречу!</string>
+    <string name="all_events_tab_label">Все встречи</string>
+    <string name="active_events_tab_label">Активные</string>
+    <string name="events_of_group_text">Встречи сообщества</string>
+    <string name="planned_events_tab_label">Запланировано</string>
+    <string name="prev_events_tab_label">Уже прошли</string>
 
     <plurals name="people_plurals">
         <item quantity="zero">%1$d человек</item>
