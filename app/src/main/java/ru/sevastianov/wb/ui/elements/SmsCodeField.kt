@@ -40,7 +40,7 @@ fun SmsCodeField(
         state = state,
         inputTransformation = InputTransformCode.then(InputTransformation.maxLength(maxLength)),
         keyboardOptions = KeyboardOptions(
-            keyboardType = KeyboardType.NumberPassword,
+            keyboardType = KeyboardType.Number,
             imeAction = ImeAction.Done
         ),
         decorator = { innerField ->

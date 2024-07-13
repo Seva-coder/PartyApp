@@ -88,7 +88,7 @@ fun PhoneInput(
 
         BasicTextField(state = state,
             keyboardOptions = KeyboardOptions(
-                keyboardType = KeyboardType.NumberPassword,
+                keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
             inputTransformation = InputTransformPhone,

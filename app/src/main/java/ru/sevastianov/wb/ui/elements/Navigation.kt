@@ -20,6 +20,7 @@ import ru.sevastianov.wb.ui.screens.ShowScreen
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
+import ru.sevastianov.wb.ui.screens.SettingsScreen
 import ru.sevastianov.wb.ui.screens.ShowCustomViews
 
 
@@ -42,7 +43,7 @@ fun Navigation(
         composable<Screen.MyEventsScr> { entry ->
             title.value = stringResource(R.string.my_events_screen_title)
             isRootScr.value = false
-            rButtonType.value = RightButton.PLUS
+            rButtonType.value = RightButton.NONE
             EventsScreen(navController = navController)
         }
 
@@ -56,9 +57,8 @@ fun Navigation(
         composable<Screen.EventsScr> { entry ->
             title.value = stringResource(R.string.events_screen_title)
             isRootScr.value = true
-            rButtonType.value = RightButton.NONE
-            //MyEventsScreen(navController = navController)
-            ShowCustomViews()
+            rButtonType.value = RightButton.PLUS
+            MyEventsScreen(navController = navController)
         }
 
         composable<Screen.ProfileScr> { entry ->
@@ -70,7 +70,7 @@ fun Navigation(
 
         composable<Screen.GroupsScr> { entry ->
             title.value = stringResource(R.string.groups_screen_title)
-            isRootScr.value = false
+            isRootScr.value = true
             rButtonType.value = RightButton.NONE
             GroupsScreen(groupList = testGroups, navController = navController)
         }
@@ -88,7 +88,21 @@ fun Navigation(
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
             val scr: Screen.EventDetailScr = entry.toRoute()
-            EventDetailScreen(eventId = scr.eventId)
+            EventDetailScreen(eventId = scr.eventId, rButtonType = rButtonType)
+        }
+
+        composable<Screen.Custom> { entry ->
+            title.value = "кастомы"
+            isRootScr.value = false
+            rButtonType.value = RightButton.NONE
+            ShowCustomViews()
+        }
+
+        composable<Screen.Settings> { entry ->
+            title.value = "Ещё"
+            isRootScr.value = true
+            rButtonType.value = RightButton.NONE
+            SettingsScreen(navController = navController)
         }
 
     }

@@ -10,6 +10,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -26,16 +27,20 @@ import androidx.compose.ui.window.DialogProperties
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.Chip
 import ru.sevastianov.wb.ui.elements.MainBtn
+import ru.sevastianov.wb.ui.elements.MainOutlineBtn
+import ru.sevastianov.wb.ui.elements.RightButton
 import ru.sevastianov.wb.ui.elements.SomeAvatars
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun EventDetailScreen(eventId: Long) {
+fun EventDetailScreen(eventId: Long, rButtonType: MutableState<RightButton>) {
     val datePlace = "13.09.2024 -Москва, ул.Громова, 4"
     val chips = listOf("Python", "Junior", "Moscow")
     val text = LoremIpsum(100).values.joinToString(separator = " ")
 
     var showDialog by remember { mutableStateOf(false) }
+
+    var eventClicked by remember { mutableStateOf(false) }
 
     LazyColumn(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)
@@ -88,12 +93,28 @@ fun EventDetailScreen(eventId: Long) {
             )
         }
         item {
-            MainBtn(
-                text = stringResource(R.string.go_to_event_btn), onClick = {},
-                modifier = Modifier
-                    .padding(vertical = 20.dp)
-                    .fillMaxWidth()
-            )
+            if (eventClicked) {
+                MainOutlineBtn(
+                    text = stringResource(R.string.not_go_to_event_btn),
+                    onClick = {
+                        eventClicked = false
+                        rButtonType.value = RightButton.NONE},
+                    modifier = Modifier
+                        .padding(vertical = 20.dp)
+                        .fillMaxWidth()
+                )
+            } else {
+                MainBtn(
+                    text = stringResource(R.string.go_to_event_btn),
+                    onClick = {
+                        eventClicked = true
+                        rButtonType.value = RightButton.OK},
+                    modifier = Modifier
+                        .padding(vertical = 20.dp)
+                        .fillMaxWidth()
+                )
+            }
+
         }
 
     }
