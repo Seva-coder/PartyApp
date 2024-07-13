@@ -66,6 +66,7 @@ fun TopBar(title: String, showBack: Boolean, onBackPressed: () -> Unit, rButtonT
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
                             imageVector = Icons.Filled.Check,
+                            tint = PartyAppTheme.colors.initialColor,
                             contentDescription = "checked"
                         )
                     }
