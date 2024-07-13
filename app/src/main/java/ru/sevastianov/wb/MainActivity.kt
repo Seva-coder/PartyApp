@@ -70,6 +70,8 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
+
 @Serializable
 sealed class Screen {
 
@@ -100,4 +102,12 @@ sealed class Screen {
     @Serializable
     data object Settings : Screen()
 
+    @Serializable
+    data object PhoneAuthScreen : Screen()
+
+    @Serializable
+    data class SmsAuthScreen(val phone: String) : Screen()
+
+    @Serializable
+    data object CreateUserScreen : Screen()
 }
