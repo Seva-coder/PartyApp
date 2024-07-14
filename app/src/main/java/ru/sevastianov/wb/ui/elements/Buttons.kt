@@ -90,7 +90,12 @@ fun MainOutlineBtn(
 }
 
 @Composable
-fun MainTextBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
+fun MainTextBtn(
+    text: String = "",
+    isEnabled: Boolean = true,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -99,10 +104,17 @@ fun MainTextBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Uni
             disabledContainerColor = Color.Transparent,
             disabledContentColor = PartyAppTheme.colors.initialDisColor
         ),
-        modifier = btnModifier.alpha(if (isEnabled) 1.0f else 0.5f),
+        modifier = modifier
+            .widthIn(min = 85.dp)
+            .height(52.dp)
+            .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
-        Text(text = text)
+        Text(
+            text = text,
+            style = PartyAppTheme.typography.subheading2,
+            color = PartyAppTheme.colors.initialColor
+        )
     }
 }
 

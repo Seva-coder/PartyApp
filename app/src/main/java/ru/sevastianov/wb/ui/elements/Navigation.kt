@@ -15,13 +15,16 @@ import ru.sevastianov.wb.ui.screens.EventsScreen
 import ru.sevastianov.wb.ui.screens.GroupDetailScreen
 import ru.sevastianov.wb.ui.screens.GroupsScreen
 import ru.sevastianov.wb.ui.screens.MyEventsScreen
+import ru.sevastianov.wb.ui.screens.CreateUserScreen
 import ru.sevastianov.wb.ui.screens.ProfileScreen
 import ru.sevastianov.wb.ui.screens.ShowScreen
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
+import ru.sevastianov.wb.ui.screens.PhoneInputScreen
 import ru.sevastianov.wb.ui.screens.SettingsScreen
 import ru.sevastianov.wb.ui.screens.ShowCustomViews
+import ru.sevastianov.wb.ui.screens.SmsInputScreen
 
 
 @Composable
@@ -34,7 +37,7 @@ fun Navigation(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.EventsScr,
+        startDestination = Screen.PhoneAuthScreen,
         Modifier.padding(
             top = paddings.calculateTopPadding(),
             bottom = paddings.calculateBottomPadding()
@@ -103,6 +106,28 @@ fun Navigation(
             isRootScr.value = true
             rButtonType.value = RightButton.NONE
             SettingsScreen(navController = navController)
+        }
+
+        composable<Screen.PhoneAuthScreen> { entry ->
+            title.value = ""
+            isRootScr.value = false
+            rButtonType.value = RightButton.NONE
+            PhoneInputScreen(navController = navController)
+        }
+
+        composable<Screen.SmsAuthScreen> { entry ->
+            title.value = ""
+            isRootScr.value = false
+            rButtonType.value = RightButton.NONE
+            val scr: Screen.SmsAuthScreen = entry.toRoute()
+            SmsInputScreen(phone = scr.phone, navController = navController)
+        }
+
+        composable<Screen.CreateUserScreen> { entry ->
+            title.value = "Профиль"
+            isRootScr.value = false
+            rButtonType.value = RightButton.NONE
+            CreateUserScreen(navController = navController)
         }
 
     }

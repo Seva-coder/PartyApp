@@ -1,6 +1,5 @@
 package ru.sevastianov.wb.ui.elements
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -14,10 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.text.input.InputTransformation
-import androidx.compose.foundation.text.input.KeyboardActionHandler
 import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.foundation.text.input.TextFieldBuffer
 import androidx.compose.foundation.text.input.insert
@@ -45,25 +42,34 @@ import ru.sevastianov.wb.ui.theme.PartyAppTheme
 @Composable
 fun PhoneInput(
     modifier: Modifier = Modifier,
-    onEnter: (String) -> Unit = {  }
+    requiredLength: Int = 10,
+    currentNumber: (String) -> Unit = {  },
+    numberIsReady: (Boolean) -> Unit = {}
 ) {
     var showDropdown by rememberSaveable { mutableStateOf(false) }
     var countryPrefix by rememberSaveable { mutableStateOf(Country.Rus) }
     val state = rememberTextFieldState()
+    var prefixActiveColor by rememberSaveable { mutableStateOf(false) }
+
+    state.edit {
+        currentNumber("${countryPrefix.prefix}${state.text}")
+        prefixActiveColor = state.text.isNotBlank()
+
+        numberIsReady(this.length == requiredLength)
+    }
+
     var showHint by rememberSaveable { mutableStateOf(true) }
 
-    Row(horizontalArrangement = Arrangement.Absolute.SpaceEvenly,
-        modifier = modifier
+    Row(modifier = modifier
         .height(36.dp)
-        .width(327.dp)
     ) {
 
         FlagPrefix(
             modifier = Modifier
-                .width(65.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .clickable { showDropdown = !showDropdown },
-            country = countryPrefix
+            country = countryPrefix,
+            active = prefixActiveColor
         )
         DropdownMenu(
             expanded = showDropdown,
@@ -75,7 +81,7 @@ fun PhoneInput(
                 DropdownMenuItem(
                     modifier = Modifier.background(color = PartyAppTheme.colors.dividerColor),
                     text = {
-                        FlagPrefix(country = country)
+                        FlagPrefix(country = country, active = true)
                     },
                     onClick = {
                         countryPrefix = country
@@ -83,26 +89,26 @@ fun PhoneInput(
                     }
                 )
             }
-
         }
+
+        Spacer(modifier = Modifier.width(8.dp))
 
         BasicTextField(state = state,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
-            inputTransformation = InputTransformPhone,
+            inputTransformation = InputTransformPhone(requiredLength),
             outputTransformation = PhoneNumberOutputTransformation,
-            //onKeyboardAction = keyboardHandler  // not work now
             modifier = Modifier
+                .weight(1f)
                 .fillMaxHeight()
-                .width(240.dp)
                 .clip(RoundedCornerShape(4.dp))
                 .background(color = PartyAppTheme.colors.dividerColor)
                 .onFocusChanged { newFocusState ->
                     showHint = (state.text.isEmpty() && !newFocusState.isFocused)
                 },
-            textStyle = PartyAppTheme.typography.bodyText1,
+            textStyle = PartyAppTheme.typography.bodyText1.copy(color = PartyAppTheme.colors.darkTextColor),
             decorator = { inputField ->
                 Box(contentAlignment = Alignment.CenterStart,
                     modifier = Modifier
@@ -121,29 +127,21 @@ fun PhoneInput(
                 }
             }
         )
-
     }
-
 }
 
-object keyboardHandler : KeyboardActionHandler {
-    override fun onKeyboardAction(performDefaultAction: () -> Unit) {
-        KeyboardActions(
-            onDone = {
-                Log.d("sd", "sd")
-            }).onDone
-    }
-
-}
 
 @Composable
 private fun FlagPrefix(
     modifier: Modifier = Modifier,
-    country: Country
+    country: Country,
+    active: Boolean
 ) {
+    val textColor = if (active) PartyAppTheme.colors.darkTextColor else PartyAppTheme.colors.greyTextColor2
     Row(horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
+            .width(65.dp)
             .fillMaxHeight()
             .background(color = PartyAppTheme.colors.dividerColor)
     ) {
@@ -151,23 +149,27 @@ private fun FlagPrefix(
         Spacer(modifier = Modifier.width(5.dp))
         Text(text = country.prefix,
             style = PartyAppTheme.typography.bodyText1,
-            color = PartyAppTheme.colors.greyTextColor2)
+            color = textColor)
     }
 }
 
-object InputTransformPhone : InputTransformation {
+class InputTransformPhone(val requiredLength: Int) : InputTransformation {
     override fun TextFieldBuffer.transformInput() {
-        if (!this.asCharSequence().matches(regex = Regex("[0-9]{0,10}"))) {
+        if (!this.asCharSequence().matches(regex = Regex("[0-9]{0,$requiredLength}"))) {
             this.revertAllChanges()
         }
     }
 }
 
 object PhoneNumberOutputTransformation : OutputTransformation {
+    private const val POSITION_3 = 3
+    private const val POSITION_7 = 7
+    private const val POSITION_10 = 10
+
     override fun TextFieldBuffer.transformOutput() {
-        if (length > 3) insert(3, " ")
-        if (length > 7) insert(7, "-")
-        if (length > 10) insert(10, "-")
+        if (length > POSITION_3) insert(POSITION_3, " ")
+        if (length > POSITION_7) insert(POSITION_7, "-")
+        if (length > POSITION_10) insert(POSITION_10, "-")
     }
 }
 
