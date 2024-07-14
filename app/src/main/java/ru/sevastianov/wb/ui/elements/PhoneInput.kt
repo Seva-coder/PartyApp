@@ -49,9 +49,11 @@ fun PhoneInput(
     var showDropdown by rememberSaveable { mutableStateOf(false) }
     var countryPrefix by rememberSaveable { mutableStateOf(Country.Rus) }
     val state = rememberTextFieldState()
+    var prefixActiveColor by rememberSaveable { mutableStateOf(false) }
 
     state.edit {
         currentNumber("${countryPrefix.prefix}${state.text}")
+        prefixActiveColor = state.text.isNotBlank()
 
         if (this.length == requiredLength) {
             numberIsReady(true)
@@ -70,7 +72,8 @@ fun PhoneInput(
             modifier = Modifier
                 .clip(RoundedCornerShape(4.dp))
                 .clickable { showDropdown = !showDropdown },
-            country = countryPrefix
+            country = countryPrefix,
+            active = prefixActiveColor
         )
         DropdownMenu(
             expanded = showDropdown,
@@ -82,7 +85,7 @@ fun PhoneInput(
                 DropdownMenuItem(
                     modifier = Modifier.background(color = PartyAppTheme.colors.dividerColor),
                     text = {
-                        FlagPrefix(country = country)
+                        FlagPrefix(country = country, active = true)
                     },
                     onClick = {
                         countryPrefix = country
@@ -109,7 +112,7 @@ fun PhoneInput(
                 .onFocusChanged { newFocusState ->
                     showHint = (state.text.isEmpty() && !newFocusState.isFocused)
                 },
-            textStyle = PartyAppTheme.typography.bodyText1,
+            textStyle = PartyAppTheme.typography.bodyText1.copy(color = PartyAppTheme.colors.darkTextColor),
             decorator = { inputField ->
                 Box(contentAlignment = Alignment.CenterStart,
                     modifier = Modifier
@@ -135,8 +138,10 @@ fun PhoneInput(
 @Composable
 private fun FlagPrefix(
     modifier: Modifier = Modifier,
-    country: Country
+    country: Country,
+    active: Boolean
 ) {
+    val textColor = if (active) PartyAppTheme.colors.darkTextColor else PartyAppTheme.colors.greyTextColor2
     Row(horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier
@@ -148,7 +153,7 @@ private fun FlagPrefix(
         Spacer(modifier = Modifier.width(5.dp))
         Text(text = country.prefix,
             style = PartyAppTheme.typography.bodyText1,
-            color = PartyAppTheme.colors.greyTextColor2)
+            color = textColor)
     }
 }
 
