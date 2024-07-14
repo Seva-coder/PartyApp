@@ -18,7 +18,9 @@ import androidx.compose.foundation.text.input.InputTransformation
 import androidx.compose.foundation.text.input.OutputTransformation
 import androidx.compose.foundation.text.input.TextFieldBuffer
 import androidx.compose.foundation.text.input.insert
+import androidx.compose.foundation.text.input.maxLength
 import androidx.compose.foundation.text.input.rememberTextFieldState
+import androidx.compose.foundation.text.input.then
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Text
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
+val phoneOkRegex = Regex("[0-9]*")
 
 @Composable
 fun PhoneInput(
@@ -94,11 +97,13 @@ fun PhoneInput(
         Spacer(modifier = Modifier.width(8.dp))
 
         BasicTextField(state = state,
-            keyboardOptions = KeyboardOptions(
+                keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Number,
                 imeAction = ImeAction.Done
             ),
-            inputTransformation = InputTransformPhone(requiredLength),
+            inputTransformation = InputTransformPhone(regex = phoneOkRegex)
+                .then(InputTransformation.maxLength(requiredLength)
+            ),  //then - чтобы не передавать длину в регулярку
             outputTransformation = PhoneNumberOutputTransformation,
             modifier = Modifier
                 .weight(1f)
@@ -153,9 +158,10 @@ private fun FlagPrefix(
     }
 }
 
-class InputTransformPhone(val requiredLength: Int) : InputTransformation {
+class InputTransformPhone(val regex: Regex) : InputTransformation {
     override fun TextFieldBuffer.transformInput() {
-        if (!this.asCharSequence().matches(regex = Regex("[0-9]{0,$requiredLength}"))) {
+        val phoneIsOk = this.toString().matches(regex = regex)
+        if (!phoneIsOk) {  // "положительную" регулярку проще понять
             this.revertAllChanges()
         }
     }
