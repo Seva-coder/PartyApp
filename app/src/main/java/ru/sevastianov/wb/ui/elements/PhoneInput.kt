@@ -55,11 +55,7 @@ fun PhoneInput(
         currentNumber("${countryPrefix.prefix}${state.text}")
         prefixActiveColor = state.text.isNotBlank()
 
-        if (this.length == requiredLength) {
-            numberIsReady(true)
-        } else {
-            numberIsReady(false)
-        }
+        numberIsReady(this.length == requiredLength)
     }
 
     var showHint by rememberSaveable { mutableStateOf(true) }

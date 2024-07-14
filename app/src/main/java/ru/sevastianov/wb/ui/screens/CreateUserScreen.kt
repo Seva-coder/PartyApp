@@ -119,7 +119,7 @@ private fun InputName(hint: String, currentText: (String) -> Unit, modifier: Mod
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Box(modifier = Modifier
-                    .padding(horizontal = 4.dp)
+                    .padding(horizontal = 8.dp)
                     .align(Alignment.CenterVertically)
                 ) {
                     if (showHint) {
