@@ -13,11 +13,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import androidx.navigation.NavHostController
+import ru.sevastianov.wb.Screen
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopBar(title: String, showBack: Boolean, onBackPressed: () -> Unit, rButtonType: RightButton = RightButton.NONE) {
+fun TopBar(title: String, showBack: Boolean, onBackPressed: () -> Unit, rButtonType: RightButton = RightButton.NONE, navController: NavHostController) {
 
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(
@@ -46,7 +48,14 @@ fun TopBar(title: String, showBack: Boolean, onBackPressed: () -> Unit, rButtonT
                     }
                 }
                 RightButton.PLUS -> {
-                    IconButton(onClick = { /* do something */ }) {
+                    IconButton(onClick = {
+                        navController.navigate(Screen.Custom) {
+                            popUpTo(Screen.Custom) {
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                        }
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.Add,
                             contentDescription = "add"
@@ -57,6 +66,7 @@ fun TopBar(title: String, showBack: Boolean, onBackPressed: () -> Unit, rButtonT
                     IconButton(onClick = { /* do something */ }) {
                         Icon(
                             imageVector = Icons.Filled.Check,
+                            tint = PartyAppTheme.colors.initialColor,
                             contentDescription = "checked"
                         )
                     }

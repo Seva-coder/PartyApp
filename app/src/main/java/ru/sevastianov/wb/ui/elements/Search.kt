@@ -18,9 +18,14 @@ import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
@@ -33,6 +38,7 @@ fun Search(
     onSearch: (state: TextFieldState) -> Unit
 ) {
     val state = rememberTextFieldState("")
+    var showHint by rememberSaveable { mutableStateOf(true) }
 
     BasicTextField(
         modifier = Modifier
@@ -40,7 +46,10 @@ fun Search(
             .fillMaxWidth()
             .height(36.dp)
             .clip(RoundedCornerShape(4.dp))
-            .background(color = PartyAppTheme.colors.neutralWhite),
+            .background(color = PartyAppTheme.colors.neutralWhite)
+            .onFocusChanged { newFocusState ->
+                showHint = (state.text.isEmpty() && !newFocusState.isFocused)
+            },
 
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
         lineLimits = TextFieldLineLimits.SingleLine,
@@ -65,7 +74,7 @@ fun Search(
                 Box(modifier = Modifier
                     .align(Alignment.CenterVertically)
                 ) {
-                    if (state.text.isEmpty()) {
+                    if (showHint) {
                         Text(text = stringResource(R.string.search_hint),
                             style = PartyAppTheme.typography.bodyText1,
                             color = PartyAppTheme.colors.greyTextColor2,

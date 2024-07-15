@@ -37,7 +37,7 @@ class MainActivity : ComponentActivity() {
                     ),
                     BottomNavItem(
                         name = getString(R.string.other_tab_text),
-                        route = Screen.MyEventsScr,
+                        route = Screen.Settings,
                         icon = ImageVector.vectorResource(id = R.drawable.other_bar_icon)
                     )
                 )
@@ -54,7 +54,8 @@ class MainActivity : ComponentActivity() {
                         TopBar(title = title.value,
                             showBack = !isRootScreen.value,
                             onBackPressed = { navController.popBackStack() },
-                            rButtonType = rTopButton.value)
+                            rButtonType = rTopButton.value,
+                            navController = navController)
                     },
                     bottomBar = { NavBar(listNavItems = listNavItems, navController = navController) },
                 ) { paddings ->
@@ -70,27 +71,42 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-sealed interface Screen {
+
+sealed class Screen {
 
     @Serializable
-    data object ShowScr : Screen
+    data object ShowScr : Screen()
 
     @Serializable
-    data object MyEventsScr : Screen
+    data object MyEventsScr : Screen()
 
     @Serializable
-    data object EventsScr : Screen
+    data object EventsScr : Screen()
 
     @Serializable
-    data object ProfileScr : Screen
+    data object ProfileScr : Screen()
 
     @Serializable
-    data object GroupsScr : Screen
+    data object GroupsScr : Screen()
 
     @Serializable
-    data class GroupDetailScr(val groupId: Long) : Screen
+    data class GroupDetailScr(val groupId: Long) : Screen()
 
     @Serializable
-    data class EventDetailScr(val eventId: Long) : Screen
+    data class EventDetailScr(val eventId: Long) : Screen()
 
+    @Serializable
+    data object Custom : Screen()
+
+    @Serializable
+    data object Settings : Screen()
+
+    @Serializable
+    data object PhoneAuthScreen : Screen()
+
+    @Serializable
+    data class SmsAuthScreen(val phone: String) : Screen()
+
+    @Serializable
+    data object CreateUserScreen : Screen()
 }

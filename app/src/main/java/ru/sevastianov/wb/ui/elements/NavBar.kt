@@ -9,23 +9,17 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
 fun NavBar(listNavItems:  List<BottomNavItem>, navController: NavHostController) {
-
-    var selectedItemIndex by rememberSaveable {
-        mutableIntStateOf(0)
-    }
 
     CompositionLocalProvider(
         LocalRippleTheme provides NoRippleTheme
@@ -36,22 +30,30 @@ fun NavBar(listNavItems:  List<BottomNavItem>, navController: NavHostController)
                 .height(64.dp)
                 .graphicsLayer { shadowElevation = 100f }
         ) {
-            listNavItems.forEachIndexed { index, item ->
+            val navBackStackEntry = navController.currentBackStackEntryAsState().value
+            val currentDestination = navBackStackEntry?.destination
+
+            listNavItems.forEach { item ->
+                val destination = item.route
                 NavigationBarItem(
                     colors = NavigationBarItemDefaults
                         .colors(
                             indicatorColor = Color.Transparent
                         ),
-                    selected = selectedItemIndex == index,
+                    selected = currentDestination?.hasRoute(destination::class) ?: false,
                     onClick = {
-                        selectedItemIndex = index
-                        navController.navigate(item.route)
+                        navController.navigate(destination) {
+                            popUpTo(destination) {
+                                inclusive = true
+                            }
+                            launchSingleTop = true
+                        }
                     },
                     icon = {
                         BarIcon(
                             imageVector = item.icon,
                             text = item.name,
-                            activeNow = selectedItemIndex == index
+                            activeNow = currentDestination?.hasRoute(item.route::class) ?: false,
                         )
                     }
                 )

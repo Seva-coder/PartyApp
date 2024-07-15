@@ -12,3 +12,5 @@ local.properties
 .idea
 /release/app-release.apk
 /release/output-metadata.json
+/gradle/wrapper/gradle-wrapper.jar
+/gradle/wrapper/gradle-wrapper.properties

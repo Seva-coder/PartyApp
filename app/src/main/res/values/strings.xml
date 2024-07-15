@@ -19,6 +19,23 @@
     <string name="events_of_group_text">Встречи сообщества</string>
     <string name="planned_events_tab_label">Запланировано</string>
     <string name="prev_events_tab_label">Уже прошли</string>
+    <string name="not_go_to_event_btn">Схожу в другой раз</string>
+    <string name="my_events_settings_label">Мои встречи</string>
+    <string name="theme_settings_label">Тема</string>
+    <string name="notifications_settings_label">Уведомления</string>
+    <string name="safety_settings_label">Безопасность</string>
+    <string name="memory_settings_label">Память и ресурсы</string>
+    <string name="help_settings_label">Помощь</string>
+    <string name="friend_settings_label">Пригласи друга</string>
+    <string name="input_phone_label">Введите номер телефона</string>
+    <string name="code_will_be_sent_label">Мы вышлем код подтверждения на указанный номер</string>
+    <string name="continue_btn">Продолжить</string>
+    <string name="input_code_label">Введите код</string>
+    <string name="code_sent_to_label">Отправили код на номер</string>
+    <string name="resend_code_label">Запросить код повторно</string>
+    <string name="name_hint">Имя (обязательно)</string>
+    <string name="surname_hint">Фамилия (опционально)</string>
+    <string name="save_btn">Сохранить</string>
 
     <plurals name="people_plurals">
         <item quantity="zero">%1$d человек</item>

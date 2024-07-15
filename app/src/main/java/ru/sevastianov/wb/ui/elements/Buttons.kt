@@ -25,7 +25,12 @@ val btnModifier = Modifier
     .height(52.dp)
 
 @Composable
-fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun MainBtn(
+    text: String = "",
+    isEnabled: Boolean = true,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Button(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -45,7 +50,18 @@ fun MainBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit, m
 
 
 @Composable
-fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = null, onClick: () -> Unit) {
+fun MainOutlineBtn(
+    text: String = "",
+    isEnabled: Boolean = true,
+    iconId: Int? = null,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val borderColor = if (isEnabled) {
+        PartyAppTheme.colors.initialColor
+    } else {
+        PartyAppTheme.colors.initialDisColor
+    }
     OutlinedButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -54,11 +70,10 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
             disabledContainerColor = Color.Transparent,
             disabledContentColor = PartyAppTheme.colors.initialDisColor
         ),
-        border = if (isEnabled) BorderStroke(
-            2.dp,
-            PartyAppTheme.colors.initialColor
-        ) else BorderStroke(2.dp, PartyAppTheme.colors.initialDisColor),
-        modifier = btnModifier
+        border = BorderStroke(2.dp, borderColor),
+        modifier = modifier
+            .widthIn(min = 85.dp)
+            .height(52.dp)
             .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
@@ -78,7 +93,12 @@ fun MainOutlineBtn(text: String = "", isEnabled: Boolean = true, iconId: Int? = 
 }
 
 @Composable
-fun MainTextBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Unit) {
+fun MainTextBtn(
+    text: String = "",
+    isEnabled: Boolean = true,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     TextButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
@@ -87,10 +107,17 @@ fun MainTextBtn(text: String = "", isEnabled: Boolean = true, onClick: () -> Uni
             disabledContainerColor = Color.Transparent,
             disabledContentColor = PartyAppTheme.colors.initialDisColor
         ),
-        modifier = btnModifier.alpha(if (isEnabled) 1.0f else 0.5f),
+        modifier = modifier
+            .widthIn(min = 85.dp)
+            .height(52.dp)
+            .alpha(if (isEnabled) 1.0f else 0.5f),
         enabled = isEnabled
     ) {
-        Text(text = text)
+        Text(
+            text = text,
+            style = PartyAppTheme.typography.subheading2,
+            color = PartyAppTheme.colors.initialColor
+        )
     }
 }
 

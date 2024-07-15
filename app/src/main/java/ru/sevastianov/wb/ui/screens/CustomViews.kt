@@ -28,7 +28,7 @@ fun ShowCustomViews() {
         )
         Spacer(modifier = Modifier.height(100.dp))
         PhoneInput(modifier = Modifier,
-            onEnter = { phone -> Log.d("PHONE", phone) }
+            currentNumber = { phone -> Log.d("PHONE", phone) }
         )
     }
 }
