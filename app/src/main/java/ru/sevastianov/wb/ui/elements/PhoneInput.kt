@@ -142,7 +142,11 @@ private fun FlagPrefix(
     country: Country,
     active: Boolean
 ) {
-    val textColor = if (active) PartyAppTheme.colors.darkTextColor else PartyAppTheme.colors.greyTextColor2
+    val textColor = if (active) {
+        PartyAppTheme.colors.darkTextColor
+    } else {
+        PartyAppTheme.colors.greyTextColor2
+    }
     Row(horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier

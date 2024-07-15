@@ -57,8 +57,11 @@ fun MainOutlineBtn(
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val borderColor =
-        if (isEnabled) PartyAppTheme.colors.initialColor else PartyAppTheme.colors.initialDisColor
+    val borderColor = if (isEnabled) {
+        PartyAppTheme.colors.initialColor
+    } else {
+        PartyAppTheme.colors.initialDisColor
+    }
     OutlinedButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
