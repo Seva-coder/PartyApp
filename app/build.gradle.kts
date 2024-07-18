@@ -51,7 +51,7 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.foundation:foundation:1.7.0-beta04")
+    implementation("androidx.compose.foundation:foundation:1.7.0-beta05")
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.3")
@@ -68,9 +68,15 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
-    implementation("androidx.navigation:navigation-compose:2.8.0-beta04")
+    implementation("androidx.navigation:navigation-compose:2.8.0-beta05")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.core:core-splashscreen:1.0.1")
+
+    // koin
+    implementation("io.insert-koin:koin-core:3.5.6")
+    implementation("io.insert-koin:koin-android:3.5.6")
+    implementation("io.insert-koin:koin-androidx-navigation:3.5.6")
+    implementation("io.insert-koin:koin-androidx-compose:3.5.6")
 
 }

@@ -43,35 +43,35 @@ fun Navigation(
             bottom = paddings.calculateBottomPadding()
         )
     ) {
-        composable<Screen.MyEventsScr> { entry ->
+        composable<Screen.MyEventsScr> {
             title.value = stringResource(R.string.my_events_screen_title)
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
             EventsScreen(navController = navController)
         }
 
-        composable<Screen.ShowScr> { entry ->
+        composable<Screen.ShowScr> {
             title.value = stringResource(R.string.show_screen_title)
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
             ShowScreen(navController)
         }
 
-        composable<Screen.EventsScr> { entry ->
+        composable<Screen.EventsScr> {
             title.value = stringResource(R.string.events_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.PLUS
             MyEventsScreen(navController = navController)
         }
 
-        composable<Screen.ProfileScr> { entry ->
+        composable<Screen.ProfileScr> {
             title.value = stringResource(R.string.profile_screen_title)
             isRootScr.value = false
             rButtonType.value = RightButton.EDIT
             ProfileScreen()
         }
 
-        composable<Screen.GroupsScr> { entry ->
+        composable<Screen.GroupsScr> {
             title.value = stringResource(R.string.groups_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.NONE
@@ -94,25 +94,32 @@ fun Navigation(
             EventDetailScreen(eventId = scr.eventId, rButtonType = rButtonType)
         }
 
-        composable<Screen.Custom> { entry ->
-            title.value = "кастомы"
+        composable<Screen.Custom> {
+            title.value = "кастомы"  //временный демонстрационный экран по кнопке "+"
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
             ShowCustomViews()
         }
 
-        composable<Screen.Settings> { entry ->
-            title.value = "Ещё"
+        composable<Screen.Settings> {
+            title.value = stringResource(R.string.other_scr_title)
             isRootScr.value = true
             rButtonType.value = RightButton.NONE
             SettingsScreen(navController = navController)
         }
 
-        composable<Screen.PhoneAuthScreen> { entry ->
+        composable<Screen.PhoneAuthScreen> {
             title.value = ""
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
-            PhoneInputScreen(navController = navController)
+            PhoneInputScreen(navToSmsScr = { phone ->
+                navController.navigate(Screen.SmsAuthScreen(phone = phone)) {
+                    popUpTo(Screen.PhoneAuthScreen) {
+                        inclusive = true
+                    }
+                    launchSingleTop = true
+                }
+            })
         }
 
         composable<Screen.SmsAuthScreen> { entry ->
@@ -120,14 +127,32 @@ fun Navigation(
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
             val scr: Screen.SmsAuthScreen = entry.toRoute()
-            SmsInputScreen(phone = scr.phone, navController = navController)
+            SmsInputScreen(
+                phone = scr.phone,
+                navToProfileCreate = {
+                    navController.navigate(Screen.CreateUserScreen) {
+                        launchSingleTop = true
+                        popUpTo(scr) {
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
 
-        composable<Screen.CreateUserScreen> { entry ->
-            title.value = "Профиль"
+        composable<Screen.CreateUserScreen> {
+            title.value = stringResource(R.string.create_user_scr_title)
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
-            CreateUserScreen(navController = navController)
+            CreateUserScreen(navToMain = {
+                    navController.navigate(Screen.EventsScr) {
+                        popUpTo(Screen.CreateUserScreen) {
+                            inclusive = true
+                        }
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
     }

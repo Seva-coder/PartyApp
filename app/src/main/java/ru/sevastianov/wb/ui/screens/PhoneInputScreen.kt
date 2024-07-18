@@ -17,16 +17,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
-import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.MainBtn
 import ru.sevastianov.wb.ui.elements.PhoneInput
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.PhoneInputVM
 
 
 @Composable
-fun PhoneInputScreen(navController: NavController) {
+fun PhoneInputScreen(vm: PhoneInputVM = koinViewModel(), navToSmsScr: (String) -> Unit) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -60,13 +60,8 @@ fun PhoneInputScreen(navController: NavController) {
             text = stringResource(R.string.continue_btn),
             isEnabled = btnEnabled,
             onClick = {
-                val dest = Screen.SmsAuthScreen(phone = phoneNumber)
-                navController.navigate(dest) {
-                    popUpTo(dest) {
-                        inclusive = true
-                    }
-                    launchSingleTop = true
-                }
+                vm.phoneInputed(phoneNumber)
+                navToSmsScr(phoneNumber)
             },
             modifier = Modifier.fillMaxWidth()
         )

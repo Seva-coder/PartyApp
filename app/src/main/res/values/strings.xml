@@ -36,6 +36,8 @@
     <string name="name_hint">Имя (обязательно)</string>
     <string name="surname_hint">Фамилия (опционально)</string>
     <string name="save_btn">Сохранить</string>
+    <string name="other_scr_title">Ещё</string>
+    <string name="create_user_scr_title">Профиль</string>
 
     <plurals name="people_plurals">
         <item quantity="zero">%1$d человек</item>

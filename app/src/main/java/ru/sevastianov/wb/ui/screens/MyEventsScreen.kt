@@ -2,6 +2,7 @@ package ru.sevastianov.wb.ui.screens
 
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
 import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
@@ -14,18 +15,24 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.MyPrevEventsList
 import ru.sevastianov.wb.ui.elements.MyEventsList
+import ru.sevastianov.wb.ui.elements.Search
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.MyEventsVM
 
 @Composable
-fun EventsScreen(navController: NavController) {
+fun MyEventsScreen(vm: MyEventsVM = koinViewModel(), navController: NavController) {
     var tabIndex by remember { mutableIntStateOf(0) }
 
     Column() {
+        Search(onSearch = { })
+
         TabRow(
             selectedTabIndex = tabIndex,
             indicator = { tabPositions ->
@@ -34,27 +41,29 @@ fun EventsScreen(navController: NavController) {
                     color = PartyAppTheme.colors.initialColor
                 )
             },
-            divider = { }
+            divider = { },
+            modifier = Modifier
+                .padding(start = 16.dp, end = 16.dp)
+
         ) {
             Tab(selected = tabIndex == 0,
                 onClick = { tabIndex = 0 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text(stringResource(R.string.planned_events_tab_label).uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.all_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
 
             Tab(selected = tabIndex == 1,
                 onClick = { tabIndex = 1 },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text(stringResource(R.string.prev_events_tab_label).uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.active_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
-
         }
+
         when (tabIndex) {
             0 -> MyEventsList(navController = navController)
             1 -> MyPrevEventsList()
         }
-
     }
 }
