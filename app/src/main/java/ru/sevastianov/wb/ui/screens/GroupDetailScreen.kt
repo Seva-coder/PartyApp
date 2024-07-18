@@ -14,14 +14,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.EventCard
 import ru.sevastianov.wb.ui.elements.Meeting
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.GroupDetailsVM
 
 @Composable
-fun GroupDetailScreen(groupId: Long, navController: NavController) {
+fun GroupDetailScreen(vm: GroupDetailsVM = koinViewModel(), groupId: Long, navController: NavController) {
 
     val meeting = Meeting(
         name = "Developer meeting",

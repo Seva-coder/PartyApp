@@ -11,13 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.ContactData
 import ru.sevastianov.wb.ui.elements.MainOutlineBtn
 import ru.sevastianov.wb.ui.elements.ShowAvatar
+import ru.sevastianov.wb.ui.viewmodels.ProfileVM
 
 @Composable
-fun ProfileScreen() {
+fun ProfileScreen(vm: ProfileVM = koinViewModel()) {
     Column(
         modifier = Modifier
             .padding(10.dp),

@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.Chip
 import ru.sevastianov.wb.ui.elements.MainBtn
@@ -31,9 +32,10 @@ import ru.sevastianov.wb.ui.elements.MainOutlineBtn
 import ru.sevastianov.wb.ui.elements.RightButton
 import ru.sevastianov.wb.ui.elements.SomeAvatars
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.EventDetailsVM
 
 @Composable
-fun EventDetailScreen(eventId: Long, rButtonType: MutableState<RightButton>) {
+fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButtonType: MutableState<RightButton>) {
     val datePlace = "13.09.2024 -Москва, ул.Громова, 4"
     val chips = listOf("Python", "Junior", "Moscow")
     val text = LoremIpsum(100).values.joinToString(separator = " ")
