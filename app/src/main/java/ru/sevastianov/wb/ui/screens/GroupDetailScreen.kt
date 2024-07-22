@@ -18,7 +18,6 @@ import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.EventCard
-import ru.sevastianov.wb.ui.elements.Meeting
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 import ru.sevastianov.wb.ui.viewmodels.GroupDetailsVM
 
@@ -75,3 +74,5 @@ fun GroupDetailScreen(vm: GroupDetailsVM = koinViewModel(), groupId: Long, navCo
     }
 
 }
+
+data class Meeting(val name: String, val place: String, val imageUrl: String, val tags: List<String>)

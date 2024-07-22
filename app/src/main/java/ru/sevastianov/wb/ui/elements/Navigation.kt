@@ -47,7 +47,7 @@ fun Navigation(
             title.value = stringResource(R.string.my_events_screen_title)
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
-            EventsScreen(navController = navController)
+            MyEventsScreen(navController = navController)
         }
 
         composable<Screen.ShowScr> {
@@ -61,7 +61,7 @@ fun Navigation(
             title.value = stringResource(R.string.events_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.PLUS
-            MyEventsScreen(navController = navController)
+            EventsScreen(navController = navController)
         }
 
         composable<Screen.ProfileScr> {

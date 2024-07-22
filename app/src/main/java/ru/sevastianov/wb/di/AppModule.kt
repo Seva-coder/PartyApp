@@ -19,10 +19,10 @@ val appModule = module {
     viewModel<PhoneInputVM> { PhoneInputVM() }
     viewModel<CreateUserVM> { CreateUserVM() }
     viewModel<EventDetailsVM> { EventDetailsVM() }
-    viewModel<EventsVM> { EventsVM() }
+    viewModel<EventsVM> { EventsVM(getAllEventsUseCase = get(), getActiveEventsUseCase = get()) }
     viewModel<GroupDetailsVM> { GroupDetailsVM() }
     viewModel<GroupsVM> { GroupsVM() }
-    viewModel<MyEventsVM> { MyEventsVM() }
+    viewModel<MyEventsVM> { MyEventsVM(getLastEventsUseCase = get(), getPlannedEventsUseCase = get()) }
     viewModel<ProfileVM> { ProfileVM() }
 
 }
