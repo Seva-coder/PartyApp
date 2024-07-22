@@ -47,7 +47,7 @@ fun CreateUserScreen(vm: CreateUserVM = koinViewModel(), navToMain: () -> Unit) 
         var surname by rememberSaveable { mutableStateOf("") }
 
         Spacer(modifier = Modifier.height(40.dp))
-        ShowAvatar(imageId = null, changeAva = true, onClick = { })
+        ShowAvatar(imageUrl = null, changeAva = true, onClick = { })
         Spacer(modifier = Modifier.height(31.dp))
 
         InputName(

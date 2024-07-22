@@ -10,7 +10,7 @@ import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -20,24 +20,20 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
-import ru.sevastianov.wb.ui.elements.MyPrevEventsList
-import ru.sevastianov.wb.ui.elements.MyEventsList
-import ru.sevastianov.wb.ui.elements.Search
+import ru.sevastianov.wb.ui.elements.EventsList
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 import ru.sevastianov.wb.ui.viewmodels.MyEventsVM
 
 @Composable
 fun MyEventsScreen(vm: MyEventsVM = koinViewModel(), navController: NavController) {
-    var tabIndex by remember { mutableIntStateOf(0) }
+    var tabIndex by remember { mutableStateOf(EventsTab.PLANNED_EVENTS) }
 
-    Column() {
-        Search(onSearch = { })
-
+    Column {
         TabRow(
-            selectedTabIndex = tabIndex,
+            selectedTabIndex = tabIndex.ordinal,
             indicator = { tabPositions ->
                 SecondaryIndicator(
-                    modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex]),
+                    modifier = Modifier.tabIndicatorOffset(tabPositions[tabIndex.ordinal]),
                     color = PartyAppTheme.colors.initialColor
                 )
             },
@@ -46,24 +42,28 @@ fun MyEventsScreen(vm: MyEventsVM = koinViewModel(), navController: NavControlle
                 .padding(start = 16.dp, end = 16.dp)
 
         ) {
-            Tab(selected = tabIndex == 0,
-                onClick = { tabIndex = 0 },
+            Tab(selected = tabIndex == EventsTab.PLANNED_EVENTS,
+                onClick = { tabIndex = EventsTab.PLANNED_EVENTS },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text(stringResource(R.string.all_events_tab_label).uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.planned_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
 
-            Tab(selected = tabIndex == 1,
-                onClick = { tabIndex = 1 },
+            Tab(selected = tabIndex == EventsTab.LAST_EVENTS,
+                onClick = { tabIndex = EventsTab.LAST_EVENTS },
                 selectedContentColor = PartyAppTheme.colors.initialColor,
                 unselectedContentColor = PartyAppTheme.colors.greyTextColor3,
-                text = { Text(stringResource(R.string.active_events_tab_label).uppercase(), fontSize = 14.sp) }
+                text = { Text(stringResource(R.string.prev_events_tab_label).uppercase(), fontSize = 14.sp) }
             )
         }
 
         when (tabIndex) {
-            0 -> MyEventsList(navController = navController)
-            1 -> MyPrevEventsList()
+            EventsTab.PLANNED_EVENTS -> EventsList(eventsListFlow = vm.getPlannedEvents(), navController = navController)
+            EventsTab.LAST_EVENTS -> EventsList(eventsListFlow = vm.getLastEvents(), navController = navController)
         }
     }
+}
+
+private enum class EventsTab {
+    PLANNED_EVENTS, LAST_EVENTS
 }

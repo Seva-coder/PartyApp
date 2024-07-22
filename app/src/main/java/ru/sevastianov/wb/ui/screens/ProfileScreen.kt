@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.elements.ContactData
@@ -20,14 +21,15 @@ import ru.sevastianov.wb.ui.viewmodels.ProfileVM
 
 @Composable
 fun ProfileScreen(vm: ProfileVM = koinViewModel()) {
+    val profile = vm.getProfile().collectAsStateWithLifecycle().value
     Column(
         modifier = Modifier
             .padding(10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(20.dp)
     ) {
-        ShowAvatar(imageId = null, changeAva = false, onClick = { })
-        ContactData(name = "Иван Иванов", phone = "+7 999 999-99-99")
+        ShowAvatar(imageUrl = profile.urlAvatar, changeAva = false, onClick = { })
+        ContactData(name = profile.name, phone = profile.phone)
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceAround,

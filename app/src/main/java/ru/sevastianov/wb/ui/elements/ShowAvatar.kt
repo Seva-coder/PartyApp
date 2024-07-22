@@ -18,18 +18,19 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun ShowAvatar(imageId: Int?, changeAva: Boolean = false, onClick: () -> Unit) {
+fun ShowAvatar(imageUrl: String?, changeAva: Boolean = false, onClick: () -> Unit) {
     val neutralWhite = PartyAppTheme.colors.neutralWhite
 
     Box(modifier = Modifier
         .size((if (changeAva) 100 else 200).dp)
         .clickable(onClick = onClick)
     ) {
-        if (imageId == null) {
+        if (imageUrl == null) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 val canvasWidth = size.width
                 val canvasHeight = size.height
@@ -48,8 +49,8 @@ fun ShowAvatar(imageId: Int?, changeAva: Boolean = false, onClick: () -> Unit) {
                     .align(Alignment.Center)
             )
         } else {
-            Image(
-                painter = painterResource(imageId),
+            AsyncImage(
+                model = imageUrl,
                 contentDescription = "avatar",
                 contentScale = ContentScale.Crop,
                 modifier = Modifier

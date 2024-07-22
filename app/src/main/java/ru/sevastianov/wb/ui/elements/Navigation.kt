@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
-import ru.sevastianov.wb.testGroups
 import ru.sevastianov.wb.ui.screens.EventDetailScreen
 import ru.sevastianov.wb.ui.screens.EventsScreen
 import ru.sevastianov.wb.ui.screens.GroupDetailScreen
@@ -47,7 +46,7 @@ fun Navigation(
             title.value = stringResource(R.string.my_events_screen_title)
             isRootScr.value = false
             rButtonType.value = RightButton.NONE
-            EventsScreen(navController = navController)
+            MyEventsScreen(navController = navController)
         }
 
         composable<Screen.ShowScr> {
@@ -61,7 +60,7 @@ fun Navigation(
             title.value = stringResource(R.string.events_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.PLUS
-            MyEventsScreen(navController = navController)
+            EventsScreen(navController = navController)
         }
 
         composable<Screen.ProfileScr> {
@@ -75,7 +74,7 @@ fun Navigation(
             title.value = stringResource(R.string.groups_screen_title)
             isRootScr.value = true
             rButtonType.value = RightButton.NONE
-            GroupsScreen(groupList = testGroups, navController = navController)
+            GroupsScreen(navController = navController)
         }
 
         composable<Screen.GroupDetailScr> { entry ->
