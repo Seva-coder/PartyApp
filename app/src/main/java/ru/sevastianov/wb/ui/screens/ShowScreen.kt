@@ -155,14 +155,8 @@ fun ShowScreen(navController: NavHostController) {
 
         Row {
             ShowAvatar(imageUrl = null, changeAva = true, onClick = { })
-            //ShowAvatar(imageUrl = R.drawable.dog, changeAva = false, onClick = { })
 
         }
-/*        ShowAvatar(
-            imageUrl = R.drawable.logo_test,
-            changeAva = true,
-            onClick = { }
-        )*/
 
     }
 }

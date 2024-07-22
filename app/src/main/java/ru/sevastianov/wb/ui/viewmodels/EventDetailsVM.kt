@@ -10,7 +10,7 @@ import ru.sevastianov.domain.usecases.ISetGoToEvent
 import ru.sevastianov.wb.ui.extensions.toUI
 import ru.sevastianov.wb.ui.models.EventDetailsUI
 
-class EventDetailsVM(val getEventDetails: IGetEventDetails, val setGoToEvent: ISetGoToEvent) : ViewModel() {
+class EventDetailsVM(private val getEventDetails: IGetEventDetails, private val setGoToEvent: ISetGoToEvent) : ViewModel() {
 
     private val eventDetailsFlow = MutableStateFlow(EventDetailsUI())
     private val immutableDetailsFlow: StateFlow<EventDetailsUI> = eventDetailsFlow
@@ -25,7 +25,7 @@ class EventDetailsVM(val getEventDetails: IGetEventDetails, val setGoToEvent: IS
         }
     }
 
-    fun setGoToEvent(state: Boolean, eventId: Long) {
+    fun participateInEvent(state: Boolean, eventId: Long) {
         setGoToEvent.execute(goingToEvent = state, eventId = eventId)
     }
 

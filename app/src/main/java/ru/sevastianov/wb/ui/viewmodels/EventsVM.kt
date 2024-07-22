@@ -10,7 +10,7 @@ import ru.sevastianov.domain.usecases.IGetAllEventsUseCase
 import ru.sevastianov.wb.ui.extensions.toUI
 import ru.sevastianov.wb.ui.models.EventUI
 
-class EventsVM(val getAllEventsUseCase: IGetAllEventsUseCase, val getActiveEventsUseCase: IGetActiveEventsUseCase) : ViewModel() {
+class EventsVM(private val getAllEventsUseCase: IGetAllEventsUseCase, private val getActiveEventsUseCase: IGetActiveEventsUseCase) : ViewModel() {
 
     private val eventsListFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutableEventsListFlow: StateFlow<List<EventUI>> = eventsListFlow

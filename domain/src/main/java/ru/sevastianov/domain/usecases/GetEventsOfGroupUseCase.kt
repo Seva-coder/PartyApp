@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flowOf
 import ru.sevastianov.domain.models.Event
 import ru.sevastianov.domain.repository.IGroupsRepository
 
-class GetEventsOfGroup(val repository: IGroupsRepository) : IGetGroupEvents {
+class GetEventsOfGroupUseCase(private val repository: IGroupsRepository) : IGetGroupEvents {
 
     override fun execute(groupId: Long): Flow<List<Event>> {
         return flowOf(mockGroupEvents)

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flowOf
 import ru.sevastianov.domain.models.Event
 import ru.sevastianov.domain.repository.IEventsRepository
 
-class GetActiveEventsUseCase(val repository: IEventsRepository) : IGetActiveEventsUseCase {
+class GetActiveEventsUseCase(private val repository: IEventsRepository) : IGetActiveEventsUseCase {
 
     override fun execute(): Flow<List<Event>> {
         return flowOf(mockAllEvents)

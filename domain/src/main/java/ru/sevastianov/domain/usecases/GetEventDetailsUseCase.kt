@@ -7,7 +7,7 @@ import ru.sevastianov.domain.models.EventDetails
 import ru.sevastianov.domain.models.Participant
 import ru.sevastianov.domain.repository.IEventsRepository
 
-class GetEventDetails(val repository: IEventsRepository) : IGetEventDetails {
+class GetEventDetailsUseCase(private val repository: IEventsRepository) : IGetEventDetails {
 
     override fun execute(eventId: Long): Flow<EventDetails> {
         return flowOf(mockEventDetails)

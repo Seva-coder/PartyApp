@@ -92,7 +92,7 @@ fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButt
                 MainOutlineBtn(
                     text = stringResource(R.string.not_go_to_event_btn),
                     onClick = {
-                        vm.setGoToEvent(state = false, eventId = eventId)
+                        vm.participateInEvent(state = false, eventId = eventId)
                         eventClicked = false
                         rButtonType.value = RightButton.NONE
                     },
@@ -104,7 +104,7 @@ fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButt
                 MainBtn(
                     text = stringResource(R.string.go_to_event_btn),
                     onClick = {
-                        vm.setGoToEvent(state = true, eventId = eventId)
+                        vm.participateInEvent(state = true, eventId = eventId)
                         eventClicked = true
                         rButtonType.value = RightButton.OK
                     },

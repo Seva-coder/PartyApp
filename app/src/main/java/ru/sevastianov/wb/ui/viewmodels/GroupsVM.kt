@@ -9,7 +9,7 @@ import ru.sevastianov.domain.usecases.IGetAllGroups
 import ru.sevastianov.wb.ui.extensions.toUI
 import ru.sevastianov.wb.ui.models.GroupUI
 
-class GroupsVM(val getAllGroups: IGetAllGroups) : ViewModel() {
+class GroupsVM(private val getAllGroups: IGetAllGroups) : ViewModel() {
 
     private val groupsListFlow = MutableStateFlow<List<GroupUI>>(emptyList())
     private val immutableActiveEventsListFlow: StateFlow<List<GroupUI>> = groupsListFlow

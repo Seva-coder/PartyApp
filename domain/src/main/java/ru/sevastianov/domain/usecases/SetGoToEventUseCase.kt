@@ -3,7 +3,7 @@ package ru.sevastianov.domain.usecases
 import ru.sevastianov.domain.repository.IEventsRepository
 
 
-class SetGoToEvent(val repository: IEventsRepository) : ISetGoToEvent {
+class SetGoToEventUseCase(private val repository: IEventsRepository) : ISetGoToEvent {
 
     override fun execute(goingToEvent: Boolean, eventId: Long) {
 

@@ -9,7 +9,7 @@ import ru.sevastianov.domain.usecases.IGetUserProfile
 import ru.sevastianov.wb.ui.extensions.toUI
 import ru.sevastianov.wb.ui.models.UserProfileUI
 
-class ProfileVM(val getUserProfile: IGetUserProfile) : ViewModel() {
+class ProfileVM(private val getUserProfile: IGetUserProfile) : ViewModel() {
 
     private val profileFlow = MutableStateFlow(UserProfileUI())
     private val immutableProfileFlow: StateFlow<UserProfileUI> = profileFlow

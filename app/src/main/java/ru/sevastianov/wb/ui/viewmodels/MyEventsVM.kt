@@ -5,12 +5,12 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.sevastianov.domain.usecases.IGetLastEventsUseCase
+import ru.sevastianov.domain.usecases.IGetOldEventsUseCase
 import ru.sevastianov.domain.usecases.IGetPlannedEventsUseCase
 import ru.sevastianov.wb.ui.extensions.toUI
 import ru.sevastianov.wb.ui.models.EventUI
 
-class MyEventsVM(val getLastEventsUseCase: IGetLastEventsUseCase, val getPlannedEventsUseCase: IGetPlannedEventsUseCase) : ViewModel() {
+class MyEventsVM(private val getLastEventsUseCase: IGetOldEventsUseCase, private val getPlannedEventsUseCase: IGetPlannedEventsUseCase) : ViewModel() {
 
     private val eventsPlannedFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutablePlannedFlow: StateFlow<List<EventUI>> = eventsPlannedFlow

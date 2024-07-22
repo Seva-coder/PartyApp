@@ -1,7 +1,7 @@
 package ru.sevastianov.domain.models
 
 data class Event(
-    var title: String,
+    val title: String,
     val date: Int,
     val place: String,
     val tags: List<String>,

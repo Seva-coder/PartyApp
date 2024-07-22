@@ -12,7 +12,7 @@ import ru.sevastianov.wb.ui.models.EventUI
 import ru.sevastianov.wb.ui.models.GroupDescriptionUI
 
 
-class GroupDetailsVM(val getGroupDescription: IGetGroupDescription, val getGroupEvents: IGetGroupEvents) : ViewModel() {
+class GroupDetailsVM(private val getGroupDescription: IGetGroupDescription, private val getGroupEvents: IGetGroupEvents) : ViewModel() {
 
     private val eventListFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutableEventsFlow: StateFlow<List<EventUI>> = eventListFlow
