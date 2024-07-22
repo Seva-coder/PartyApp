@@ -18,11 +18,11 @@ val appModule = module {
     viewModel<SmsCodeVM> { SmsCodeVM() }
     viewModel<PhoneInputVM> { PhoneInputVM() }
     viewModel<CreateUserVM> { CreateUserVM() }
-    viewModel<EventDetailsVM> { EventDetailsVM() }
+    viewModel<EventDetailsVM> { EventDetailsVM(getEventDetails = get(), setGoToEvent = get()) }
     viewModel<EventsVM> { EventsVM(getAllEventsUseCase = get(), getActiveEventsUseCase = get()) }
-    viewModel<GroupDetailsVM> { GroupDetailsVM() }
-    viewModel<GroupsVM> { GroupsVM() }
+    viewModel<GroupDetailsVM> { GroupDetailsVM(getGroupDescription = get(), getGroupEvents = get()) }
+    viewModel<GroupsVM> { GroupsVM(getAllGroups = get()) }
     viewModel<MyEventsVM> { MyEventsVM(getLastEventsUseCase = get(), getPlannedEventsUseCase = get()) }
-    viewModel<ProfileVM> { ProfileVM() }
+    viewModel<ProfileVM> { ProfileVM(getUserProfile = get()) }
 
 }

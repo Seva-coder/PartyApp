@@ -10,6 +10,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.Screen
@@ -19,7 +20,8 @@ import ru.sevastianov.wb.ui.theme.PartyAppTheme
 import ru.sevastianov.wb.ui.viewmodels.GroupsVM
 
 @Composable
-fun GroupsScreen(vm: GroupsVM = koinViewModel(), groupList: List<Group>, navController: NavController) {
+fun GroupsScreen(vm: GroupsVM = koinViewModel(), navController: NavController) {
+    val groupList = vm.getAllGroups().collectAsStateWithLifecycle().value
     Column {
         Search(onSearch = {  })
 
@@ -45,6 +47,3 @@ fun GroupsScreen(vm: GroupsVM = koinViewModel(), groupList: List<Group>, navCont
         }
     }
 }
-
-
-data class Group(val name: String, val imgUrl: String, val numberPerson: Int)

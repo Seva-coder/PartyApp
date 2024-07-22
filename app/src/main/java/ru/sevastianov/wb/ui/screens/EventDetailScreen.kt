@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -20,7 +21,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
@@ -36,13 +36,16 @@ import ru.sevastianov.wb.ui.viewmodels.EventDetailsVM
 
 @Composable
 fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButtonType: MutableState<RightButton>) {
-    val datePlace = "13.09.2024 -Москва, ул.Громова, 4"
-    val chips = listOf("Python", "Junior", "Moscow")
-    val text = LoremIpsum(100).values.joinToString(separator = " ")
+    vm.setEventId(eventId)
+    val details = vm.getDetails().collectAsState().value
+
+    val chips = details.chips
+    val description = details.description
+    val datePlace = "${details.place} - ${details.date}"  // где лучше форматировать время?
 
     var showDialog by remember { mutableStateOf(false) }
 
-    var eventClicked by remember { mutableStateOf(false) }
+    var eventClicked by remember { mutableStateOf(details.iGoing) }
 
     LazyColumn(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)
@@ -73,24 +76,14 @@ fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButt
         }
         item {
             Text(
-                text = text,
+                text = description,
                 style = PartyAppTheme.typography.metadata1,
                 color = PartyAppTheme.colors.greyTextColor
             )
         }
         item {
             SomeAvatars(
-                urls = listOf(
-                    "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
-                    "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
-                    "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
-                    "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
-                    "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
-                    "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
-                    "https://live.staticflickr.com/65535/53843918114_2f6a4c1b85_o_d.png",
-                    "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg",
-                    "https://live.staticflickr.com/65535/53844005940_36eb395df8_o_d.jpg"
-                ),
+                urls = details.participants.map { it.imageUrl },
                 modifier = Modifier.padding(top = 30.dp)
             )
         }
@@ -99,8 +92,10 @@ fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButt
                 MainOutlineBtn(
                     text = stringResource(R.string.not_go_to_event_btn),
                     onClick = {
+                        vm.setGoToEvent(state = false, eventId = eventId)
                         eventClicked = false
-                        rButtonType.value = RightButton.NONE},
+                        rButtonType.value = RightButton.NONE
+                    },
                     modifier = Modifier
                         .padding(vertical = 20.dp)
                         .fillMaxWidth()
@@ -109,8 +104,10 @@ fun EventDetailScreen(vm: EventDetailsVM = koinViewModel(), eventId: Long, rButt
                 MainBtn(
                     text = stringResource(R.string.go_to_event_btn),
                     onClick = {
+                        vm.setGoToEvent(state = true, eventId = eventId)
                         eventClicked = true
-                        rButtonType.value = RightButton.OK},
+                        rButtonType.value = RightButton.OK
+                    },
                     modifier = Modifier
                         .padding(vertical = 20.dp)
                         .fillMaxWidth()

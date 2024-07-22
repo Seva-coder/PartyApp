@@ -12,7 +12,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.Chip
 import ru.sevastianov.wb.ui.elements.EventAvatar
@@ -155,15 +154,15 @@ fun ShowScreen(navController: NavHostController) {
         )
 
         Row {
-            ShowAvatar(imageId = null, changeAva = true, onClick = { })
-            ShowAvatar(imageId = R.drawable.dog, changeAva = false, onClick = { })
+            ShowAvatar(imageUrl = null, changeAva = true, onClick = { })
+            //ShowAvatar(imageUrl = R.drawable.dog, changeAva = false, onClick = { })
 
         }
-        ShowAvatar(
-            imageId = R.drawable.logo_test,
+/*        ShowAvatar(
+            imageUrl = R.drawable.logo_test,
             changeAva = true,
             onClick = { }
-        )
+        )*/
 
     }
 }

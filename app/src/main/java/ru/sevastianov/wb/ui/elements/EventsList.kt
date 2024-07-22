@@ -7,9 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import kotlinx.coroutines.flow.StateFlow
 import ru.sevastianov.wb.Screen
@@ -18,7 +18,7 @@ import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
 fun EventsList(eventsListFlow: StateFlow<List<EventUI>>, navController: NavController) {
-    val eventsList = eventsListFlow.collectAsState().value
+    val eventsList = eventsListFlow.collectAsStateWithLifecycle().value
     LazyColumn(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)
     ) {
