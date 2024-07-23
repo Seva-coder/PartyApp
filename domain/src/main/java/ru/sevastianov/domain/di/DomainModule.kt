@@ -1,4 +1,4 @@
-package ru.sevastianov.wb.di
+package ru.sevastianov.domain.di
 
 import org.koin.dsl.module
 import ru.sevastianov.domain.usecases.GetActiveEventsUseCase

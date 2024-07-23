@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flowOf
 import ru.sevastianov.domain.models.GroupDescription
 import ru.sevastianov.domain.repository.IGroupsRepository
 
-class GetGroupDescriptionUseCase(private val repository: IGroupsRepository) : IGetGroupDescription {
+internal class GetGroupDescriptionUseCase(private val repository: IGroupsRepository) : IGetGroupDescription {
     override fun execute(groupId: Long): Flow<GroupDescription> {
         return flowOf(mockGroupDescription)
     }

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.flowOf
 import ru.sevastianov.domain.models.UserProfile
 import ru.sevastianov.domain.repository.IEventsRepository
 
-class GetUserProfileUseCase(private val repository: IEventsRepository) : IGetUserProfile {
+internal class GetUserProfileUseCase(private val repository: IEventsRepository) : IGetUserProfile {
     override fun execute(): Flow<UserProfile> {
         return flowOf(mockProfile)
     }

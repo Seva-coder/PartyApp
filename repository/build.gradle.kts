@@ -38,4 +38,7 @@ dependencies {
 
     //modules
     implementation(project(path = ":domain"))
+
+    //DI
+    implementation(libs.koin.core)
 }

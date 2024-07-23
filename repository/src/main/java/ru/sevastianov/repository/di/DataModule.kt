@@ -1,4 +1,4 @@
-package ru.sevastianov.wb.di
+package ru.sevastianov.repository.di
 
 import org.koin.dsl.module
 import ru.sevastianov.domain.repository.IEventsRepository

@@ -10,4 +10,7 @@ java {
 
 dependencies {
     implementation(libs.kotlinx.coroutines.core)
+
+    //DI
+    implementation(libs.koin.core)
 }

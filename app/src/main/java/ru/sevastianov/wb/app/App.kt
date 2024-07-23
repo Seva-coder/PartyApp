@@ -6,8 +6,8 @@ import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 import ru.sevastianov.wb.di.appModule
-import ru.sevastianov.wb.di.dataModule
-import ru.sevastianov.wb.di.domainModule
+import ru.sevastianov.repository.di.dataModule
+import ru.sevastianov.domain.di.domainModule
 
 class App : Application() {
 

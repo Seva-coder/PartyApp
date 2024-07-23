@@ -39,7 +39,7 @@ fun MyEventsScreen(vm: MyEventsVM = koinViewModel(), navController: NavControlle
             },
             divider = { },
             modifier = Modifier
-                .padding(start = 16.dp, end = 16.dp)
+                .padding(horizontal = 16.dp)
 
         ) {
             Tab(selected = tabIndex == EventsTab.PLANNED_EVENTS,
