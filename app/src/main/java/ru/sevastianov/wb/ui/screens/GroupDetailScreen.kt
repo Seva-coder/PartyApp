@@ -11,27 +11,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
 import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.EventCard
-import ru.sevastianov.wb.ui.elements.Meeting
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.GroupDetailsVM
 
 @Composable
-fun GroupDetailScreen(groupId: Long, navController: NavController) {
+fun GroupDetailScreen(vm: GroupDetailsVM = koinViewModel(), groupId: Long, navController: NavController) {
+    vm.setGroupId(groupId)
 
-    val meeting = Meeting(
-        name = "Developer meeting",
-        place = "13.09.2024 - Москва",
-        imageUrl = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png",
-        tags = listOf("Python", "Junior", "Moscow")
-    )
-    val list = List(5) { meeting }
-
-    val text = LoremIpsum(100).values.joinToString(separator = " ")
+    val text = vm.getDescription().collectAsStateWithLifecycle().value.description
+    val list = vm.getListEvents().collectAsStateWithLifecycle().value
 
     LazyColumn(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)
@@ -54,10 +49,10 @@ fun GroupDetailScreen(groupId: Long, navController: NavController) {
             Spacer(modifier = Modifier.height(8.dp))
             EventCard(
                 imageUrl = meeting.imageUrl,
-                title = meeting.name,
+                title = meeting.title,
                 dateWithPlace = meeting.place,
                 tags = meeting.tags,
-                isEnded = false,
+                isEnded = meeting.isEnded,
                 eventId = index.toLong()
             ) { eventIdClicked ->
                 navController.navigate(Screen.EventDetailScr(eventId = eventIdClicked)) {

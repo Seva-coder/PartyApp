@@ -15,3 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "PartyApp"
 include(":app")
+include(":domain")
+include(":repository")

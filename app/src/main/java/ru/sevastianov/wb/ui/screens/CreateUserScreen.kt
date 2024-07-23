@@ -26,15 +26,15 @@ import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
+import org.koin.androidx.compose.koinViewModel
 import ru.sevastianov.wb.R
-import ru.sevastianov.wb.Screen
 import ru.sevastianov.wb.ui.elements.MainBtn
 import ru.sevastianov.wb.ui.elements.ShowAvatar
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
+import ru.sevastianov.wb.ui.viewmodels.CreateUserVM
 
 @Composable
-fun CreateUserScreen(navController: NavHostController) {
+fun CreateUserScreen(vm: CreateUserVM = koinViewModel(), navToMain: () -> Unit) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -43,14 +43,19 @@ fun CreateUserScreen(navController: NavHostController) {
             .fillMaxSize()
     ) {
         var btnEnabled by rememberSaveable { mutableStateOf(false) }
+        var name by rememberSaveable { mutableStateOf("") }
+        var surname by rememberSaveable { mutableStateOf("") }
 
         Spacer(modifier = Modifier.height(40.dp))
-        ShowAvatar(imageId = null, changeAva = true, onClick = { })
+        ShowAvatar(imageUrl = null, changeAva = true, onClick = { })
         Spacer(modifier = Modifier.height(31.dp))
 
         InputName(
             hint = stringResource(R.string.name_hint),
-            currentText = { text -> btnEnabled = text.isNotBlank() },
+            currentText = { text ->
+                name = text
+                btnEnabled = text.isNotBlank()
+            },
             modifier = Modifier
                 .padding(horizontal = 6.dp)
                 .height(36.dp)
@@ -60,7 +65,9 @@ fun CreateUserScreen(navController: NavHostController) {
 
         InputName(
             hint = stringResource(R.string.surname_hint),
-            currentText = { text -> },
+            currentText = { text ->
+                surname = text
+            },
             modifier = Modifier
                 .padding(horizontal = 6.dp)
                 .height(36.dp)
@@ -70,13 +77,8 @@ fun CreateUserScreen(navController: NavHostController) {
             text = stringResource(R.string.save_btn),
             isEnabled = btnEnabled,
             onClick = {
-                val dest = Screen.EventsScr
-                navController.navigate(dest) {
-                    popUpTo(dest) {
-                        inclusive = true
-                    }
-                    launchSingleTop = true
-                }
+                vm.createUser(name = name, surname = surname)
+                navToMain()
             },
             modifier = Modifier
                 .padding(horizontal = 12.dp, vertical = 48.dp)
