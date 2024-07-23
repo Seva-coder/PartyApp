@@ -1,3 +1,3 @@
 package ru.sevastianov.wb.ui.models
 
-data class GroupDescriptionUI(val description: String = "")
+internal data class GroupDescriptionUI(val description: String = "")

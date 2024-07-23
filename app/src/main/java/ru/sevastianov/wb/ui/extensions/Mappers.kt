@@ -13,7 +13,7 @@ import ru.sevastianov.wb.ui.models.GroupUI
 import ru.sevastianov.wb.ui.models.ParticipantUI
 import ru.sevastianov.wb.ui.models.UserProfileUI
 
-fun Event.toUI() = EventUI(
+internal fun Event.toUI() = EventUI(
     title = this.title,
     date = this.date,
     place = this.place,
@@ -22,7 +22,7 @@ fun Event.toUI() = EventUI(
     isEnded = this.isEnded
 )
 
-fun UserProfile.toUI() = UserProfileUI(
+internal fun UserProfile.toUI() = UserProfileUI(
     name = this.name,
     phone  = this.phone,
     urlAvatar = this.urlAvatar,
@@ -32,17 +32,17 @@ fun UserProfile.toUI() = UserProfileUI(
     linkFacebook = this.linkFacebook
 )
 
-fun Group.toUI() = GroupUI(
+internal fun Group.toUI() = GroupUI(
     imgUrl = this.imgUrl,
     name = this.name,
     numberPerson = this.numberPerson
 )
 
-fun GroupDescription.toUI() = GroupDescriptionUI(
+internal fun GroupDescription.toUI() = GroupDescriptionUI(
     description = this.description
 )
 
-fun EventDetails.toUI() = EventDetailsUI(
+internal fun EventDetails.toUI() = EventDetailsUI(
     chips = this.chips,
     date = this.date,
     place = this.place,

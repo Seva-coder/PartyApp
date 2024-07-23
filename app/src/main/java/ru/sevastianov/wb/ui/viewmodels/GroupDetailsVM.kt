@@ -16,12 +16,12 @@ class GroupDetailsVM(private val getGroupDescription: IGetGroupDescription, priv
 
     private val eventListFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutableEventsFlow: StateFlow<List<EventUI>> = eventListFlow
-    fun getListEvents() = immutableEventsFlow
+    internal fun getListEvents() = immutableEventsFlow
 
 
     private val descriptiontFlow = MutableStateFlow(GroupDescriptionUI())
     private val immutableDescriptionFlow: StateFlow<GroupDescriptionUI> = descriptiontFlow
-    fun getDescription() = immutableDescriptionFlow
+    internal fun getDescription() = immutableDescriptionFlow
 
     fun setGroupId(id: Long) {
         viewModelScope.launch {

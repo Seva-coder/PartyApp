@@ -1,6 +1,6 @@
 package ru.sevastianov.wb.ui.models
 
-data class UserProfileUI(
+internal data class UserProfileUI(
     val name: String = "",
     val phone: String = "",
     val urlAvatar: String = "",

@@ -14,11 +14,11 @@ class EventsVM(private val getAllEventsUseCase: IGetAllEventsUseCase, private va
 
     private val eventsListFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutableEventsListFlow: StateFlow<List<EventUI>> = eventsListFlow
-    fun getAllEvents() = immutableEventsListFlow
+    internal fun getAllEvents() = immutableEventsListFlow
 
     private val eventsActiveListFlow = MutableStateFlow<List<EventUI>>(emptyList())
     private val immutableActiveEventsListFlow: StateFlow<List<EventUI>> = eventsActiveListFlow
-    fun getActiveEvents() = immutableActiveEventsListFlow
+    internal fun getActiveEvents() = immutableActiveEventsListFlow
 
     init {
         updateEvents()

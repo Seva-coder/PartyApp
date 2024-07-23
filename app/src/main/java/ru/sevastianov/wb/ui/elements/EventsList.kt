@@ -17,7 +17,7 @@ import ru.sevastianov.wb.ui.models.EventUI
 import ru.sevastianov.wb.ui.theme.PartyAppTheme
 
 @Composable
-fun EventsList(eventsListFlow: StateFlow<List<EventUI>>, navController: NavController) {
+internal fun EventsList(eventsListFlow: StateFlow<List<EventUI>>, navController: NavController) {
     val eventsList = eventsListFlow.collectAsStateWithLifecycle().value
     LazyColumn(modifier = Modifier
         .padding(start = 16.dp, end = 16.dp)

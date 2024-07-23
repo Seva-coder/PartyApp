@@ -14,7 +14,7 @@ class EventDetailsVM(private val getEventDetails: IGetEventDetails, private val 
 
     private val eventDetailsFlow = MutableStateFlow(EventDetailsUI())
     private val immutableDetailsFlow: StateFlow<EventDetailsUI> = eventDetailsFlow
-    fun getDetails() = immutableDetailsFlow
+    internal fun getDetails() = immutableDetailsFlow
 
 
     fun setEventId(id: Long) {

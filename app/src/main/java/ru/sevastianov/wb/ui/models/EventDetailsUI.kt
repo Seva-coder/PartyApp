@@ -1,7 +1,7 @@
 package ru.sevastianov.wb.ui.models
 
 
-data class EventDetailsUI(
+internal data class EventDetailsUI(
     val chips: List<String> = emptyList(),
     val date: Int = 0,
     val place: String = "",

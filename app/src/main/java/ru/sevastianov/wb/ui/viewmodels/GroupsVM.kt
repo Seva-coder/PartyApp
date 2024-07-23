@@ -13,7 +13,7 @@ class GroupsVM(private val getAllGroups: IGetAllGroups) : ViewModel() {
 
     private val groupsListFlow = MutableStateFlow<List<GroupUI>>(emptyList())
     private val immutableActiveEventsListFlow: StateFlow<List<GroupUI>> = groupsListFlow
-    fun getAllGroups() = immutableActiveEventsListFlow
+    internal fun getAllGroups() = immutableActiveEventsListFlow
 
     init {
         updateGroups()
