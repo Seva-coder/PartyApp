@@ -1,6 +1,6 @@
 package ru.sevastianov.wb.ui.models
 
-data class EventUI(
+internal data class EventUI(
     var title: String,
     val date: Int,
     val place: String,

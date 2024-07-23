@@ -13,7 +13,7 @@ class ProfileVM(private val getUserProfile: IGetUserProfile) : ViewModel() {
 
     private val profileFlow = MutableStateFlow(UserProfileUI())
     private val immutableProfileFlow: StateFlow<UserProfileUI> = profileFlow
-    fun getProfile() = immutableProfileFlow
+    internal fun getProfile() = immutableProfileFlow
 
     init {
         updateProfileData()
