@@ -30,9 +30,9 @@ class GetActiveEventsUseCaseTest : KoinTest {
 
     @Test
     fun haveFutureEvent() = runTest {
-        val unixTime = System.currentTimeMillis() / 1000
+        val currentUnixTime = System.currentTimeMillis() / 1000
         useCase.execute().collect { list ->
-            Assert.assertTrue("Нет новых событий!", list.any { event -> event.date > unixTime })
+            Assert.assertTrue("Нет новых событий!", list.any { event -> event.date > currentUnixTime })
         }
     }
 

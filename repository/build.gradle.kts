@@ -14,6 +14,10 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
+    buildFeatures {
+        buildConfig = true
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -33,12 +37,15 @@ android {
 }
 
 dependencies {
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    //testImplementation(libs.junit)
+    //androidTestImplementation(libs.androidx.junit)
+    implementation(libs.kotlinx.coroutines.core)
 
     //modules
     implementation(project(path = ":domain"))
 
     //DI
     implementation(libs.koin.core)
+
+
 }

@@ -1,14 +1,13 @@
 package ru.sevastianov.domain.usecases
 
-import ru.sevastianov.domain.repository.IUserRepository
+import ru.sevastianov.domain.repository.IEventsRepository
 
 
-internal class SetGoToEventUseCase(private val repository: IUserRepository) : ISetGoToEvent {
+internal class SetGoToEventUseCase(private val repository: IEventsRepository) : ISetGoToEvent {
 
     override fun execute(goingToEvent: Boolean, eventId: Long) {
-
+        repository.setGoToEvent(goingToEvent = goingToEvent, eventId = eventId)
     }
-
 
 }
 
