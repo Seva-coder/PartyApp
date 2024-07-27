@@ -14,7 +14,7 @@ internal class GetActiveEventsUseCase(private val repository: IEventsRepository)
     private val meeting = Event(
         title = "Active meeting",
         place = "13.09.2024 - Москва",
-        date = 32432432,
+        date = 1735164710,
         isEnded = false,
         imageUrl = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png",
         tags = listOf("Python", "Junior", "Moscow")

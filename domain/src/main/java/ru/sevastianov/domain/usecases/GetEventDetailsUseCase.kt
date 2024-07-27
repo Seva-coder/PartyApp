@@ -17,7 +17,7 @@ internal class GetEventDetailsUseCase(private val repository: IEventsRepository)
         chips = listOf("1", "2", "345"),
         date = 345678,
         place = "Вишневогрск",
-        coordinates = Coordinates(56.00, 60.00),
+        coordinates = Coordinates(56.00, -180.00),
         description = "descr \n \n \n \n 12345",
         iGoing = false,
         participants = listOf(

@@ -15,7 +15,7 @@ internal class GetOldEventsUseCase(private val repository: IEventsRepository) : 
         Event(
             title = "Last event $index",
             place = "13.09.2024 - Москва",
-            date = 32432432,
+            date = 1720007704,
             isEnded = true,
             imageUrl = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png",
             tags = listOf("Python", "Junior", "Moscow")
