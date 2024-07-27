@@ -13,4 +13,9 @@ dependencies {
 
     //DI
     implementation(libs.koin.core)
+    testImplementation(libs.koin.test)
+
+    //Testing
+    testImplementation(libs.junit)
+    testImplementation(libs.kotlinx.coroutines.test)
 }
