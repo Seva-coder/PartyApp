@@ -32,28 +32,32 @@ class GetEventsOfGroupUseCaseTest : KoinTest {
     @Test
     fun eventsListNotEmpty() = runTest {
         useCase.execute(groupId = groupId).collect { list ->
-            Assert.assertTrue("Список пустой!", list.isNotEmpty())
+            val result = list.isNotEmpty()
+            Assert.assertTrue("Список пустой!", result)
         }
     }
 
     @Test
     fun namesNotEmpty() = runTest {
         useCase.execute(groupId = groupId).collect { list ->
-            Assert.assertTrue("Название пустое!", list.all { it.title.isNotBlank() })
+            val result = list.all { it.title.isNotBlank() }
+            Assert.assertTrue("Название пустое!", result)
         }
     }
 
     @Test
     fun placesNotEmpty() = runTest {
         useCase.execute(groupId = groupId).collect { list ->
-            Assert.assertTrue("Название места пустое!", list.all { it.place.isNotBlank() })
+            val result = list.all { it.place.isNotBlank() }
+            Assert.assertTrue("Название места пустое!", result)
         }
     }
 
     @Test
     fun urlsAreOk() = runTest {
         useCase.execute(groupId = groupId).collect { list ->
-            Assert.assertTrue("url невалидный!", list.all { it.imageUrl.matches(urlRegex) })
+            val result = list.all { it.imageUrl.matches(urlRegex) }
+            Assert.assertTrue("url невалидный!", result)
         }
     }
 

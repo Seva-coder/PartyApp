@@ -1,4 +1,4 @@
-package ru.sevastianov.domain.stubRepositories
+package ru.sevastianov.domain.stubRepository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf

@@ -30,37 +30,43 @@ class GetOldEventsUseCaseTest : KoinTest {
 
     @Test
     fun allEventsAreOld() = runTest {
-        val currentUnixTime = System.currentTimeMillis() / 1000
+        val millisInSecondSec = 1000
+        val currentUnixTime = System.currentTimeMillis() / millisInSecondSec
         useCase.execute().collect { list ->
-            Assert.assertTrue("Есть будущее событие!", list.all { event -> event.date < currentUnixTime })
+            val result = list.all { event -> event.date < currentUnixTime }
+            Assert.assertTrue("Есть будущее событие!", result)
         }
     }
 
     @Test
     fun eventsListNotEmpty() = runTest {
         useCase.execute().collect { list ->
-            Assert.assertTrue("Список пустой!", list.isNotEmpty())
+            val result = list.isNotEmpty()
+            Assert.assertTrue("Список пустой!", result)
         }
     }
 
     @Test
     fun namesNotEmpty() = runTest {
         useCase.execute().collect { list ->
-            Assert.assertTrue("Название пустое!", list.all { it.title.isNotBlank() })
+            val result = list.all { it.title.isNotBlank() }
+            Assert.assertTrue("Название пустое!", result)
         }
     }
 
     @Test
     fun placeNotEmpty() = runTest {
         useCase.execute().collect { list ->
-            Assert.assertTrue("Место пустое!", list.all { it.place.isNotBlank() })
+            val result = list.all { it.place.isNotBlank() }
+            Assert.assertTrue("Место пустое!", result)
         }
     }
 
     @Test
-    fun urlNotEmpty() = runTest {
+    fun urlMatchesBasicRegex() = runTest {
         useCase.execute().collect { list ->
-            Assert.assertTrue("URL не валидный!", list.all { it.imageUrl.matches(urlRegex) })
+            val result = list.all { it.imageUrl.matches(urlRegex) }
+            Assert.assertTrue("URL не валидный!", result)
         }
     }
 

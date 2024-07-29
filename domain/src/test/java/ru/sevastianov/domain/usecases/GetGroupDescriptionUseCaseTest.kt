@@ -32,7 +32,8 @@ class GetGroupDescriptionUseCaseTest : KoinTest {
     @Test
     fun descriptionNotEmpty() = runTest {
         useCase.execute(groupId = groupId).collect {
-            Assert.assertTrue("Описание пустое!", it.description.isNotBlank())
+            val result = it.description.isNotBlank()
+            Assert.assertTrue("Описание пустое!", result)
         }
     }
 
