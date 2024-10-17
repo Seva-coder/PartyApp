@@ -7,7 +7,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 
 
-
 @Composable
 fun PartyAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),

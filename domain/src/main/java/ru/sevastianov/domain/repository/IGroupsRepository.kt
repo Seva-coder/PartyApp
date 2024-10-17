@@ -12,4 +12,8 @@ interface IGroupsRepository {
     fun getEventsOfGroup(groupId: Long): Flow<List<Event>>
     fun getGroupDescription(groupId: Long): Flow<GroupDescription>
 
+    ///
+
+    fun getGroupDescriptionByEventId(eventId: Long): Flow<GroupDescription>
+
 }

@@ -1,28 +1,39 @@
 package ru.sevastianov.wb.di
 
+import android.util.Log
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
-import ru.sevastianov.wb.ui.viewmodels.CreateUserVM
-import ru.sevastianov.wb.ui.viewmodels.EventDetailsVM
-import ru.sevastianov.wb.ui.viewmodels.EventsVM
-import ru.sevastianov.wb.ui.viewmodels.GroupDetailsVM
-import ru.sevastianov.wb.ui.viewmodels.GroupsVM
-import ru.sevastianov.wb.ui.viewmodels.MyEventsVM
-import ru.sevastianov.wb.ui.viewmodels.PhoneInputVM
-import ru.sevastianov.wb.ui.viewmodels.ProfileVM
-import ru.sevastianov.wb.ui.viewmodels.SmsCodeVM
+import ru.sevastianov.wb.Domain2Ui
+import ru.sevastianov.wb.ui.newViewModels.EventDetailVM
+import ru.sevastianov.wb.ui.newViewModels.EventsScreenVM
+import ru.sevastianov.wb.ui.newViewModels.UsersListVM
 
 
 val appModule = module {
+    single<Domain2Ui> { Domain2Ui() }
+    viewModel<EventsScreenVM> {
+        EventsScreenVM(
+            getBigEvents = get(),
+            getNearestEvents = get(), updNearest = get(), getAllTags = get(), getAllEvents = get(),
+            setEventTags = get(), getEventsByTags = get(), converter = get(),
+            filterEventsByText = get(), getFiltredEvents = get(), interestsExist = get()
+        )
+    }
 
-    viewModel<SmsCodeVM> { SmsCodeVM() }
-    viewModel<PhoneInputVM> { PhoneInputVM() }
-    viewModel<CreateUserVM> { CreateUserVM() }
-    viewModel<EventDetailsVM> { EventDetailsVM(getEventDetails = get(), setGoToEvent = get()) }
-    viewModel<EventsVM> { EventsVM(getAllEventsUseCase = get(), getActiveEventsUseCase = get()) }
-    viewModel<GroupDetailsVM> { GroupDetailsVM(getGroupDescription = get(), getGroupEvents = get()) }
-    viewModel<GroupsVM> { GroupsVM(getAllGroups = get()) }
-    viewModel<MyEventsVM> { MyEventsVM(getLastEventsUseCase = get(), getPlannedEventsUseCase = get()) }
-    viewModel<ProfileVM> { ProfileVM(getUserProfile = get()) }
+    viewModel<EventDetailVM> { (eventId: Long) ->
+        Log.d("CREATE", "CREATE")
+        EventDetailVM(
+            eventId = eventId,
+            converter = get(),
+            getEventDetails = get(),
+            setEventId = get(),
+            getGroupDescr = get(),
+            setEventSubscription = get(),
+            getCurrentEventSubscription = get(),
+            getSameEvents = get(),
+            getEventUsers = get()
+        )
+    }
 
+    viewModel<UsersListVM> { UsersListVM(getEventUsers = get(), converter = get()) }
 }

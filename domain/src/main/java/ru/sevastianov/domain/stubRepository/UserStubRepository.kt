@@ -2,6 +2,8 @@ package ru.sevastianov.domain.stubRepository
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import ru.sevastianov.domain.models.ParticipantAvatar
+import ru.sevastianov.domain.models.UserAvaNameTag
 import ru.sevastianov.domain.models.UserProfile
 import ru.sevastianov.domain.repository.IUserRepository
 
@@ -19,6 +21,14 @@ class UserStubRepository : IUserRepository {
             linkFacebook = "http://8.3"
         )
         return flowOf(profile)
+    }
+
+    override fun getEventUserAvatars(eventId: Long): Flow<List<ParticipantAvatar>> {
+        return flowOf()
+    }
+
+    override fun getEventUsers(eventId: Long): Flow<List<UserAvaNameTag>> {
+        return flowOf()
     }
 
 }

@@ -5,9 +5,10 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
-import ru.sevastianov.wb.di.appModule
-import ru.sevastianov.repository.di.dataModule
 import ru.sevastianov.domain.di.domainModule
+import ru.sevastianov.repository.di.dataModule
+import ru.sevastianov.wb.di.appModule
+
 
 class App : Application() {
 

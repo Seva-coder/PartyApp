@@ -38,6 +38,22 @@
     <string name="save_btn">Сохранить</string>
     <string name="other_scr_title">Ещё</string>
     <string name="create_user_scr_title">Профиль</string>
+    <string name="habr_hint">Хабр</string>
+    <string name="telegram_hint">Телеграм</string>
+    <string name="you_go_label">✓ Вы пойдёте</string>
+    <string name="cant_go_button_label">Не смогу пойти</string>
+    <string name="join_to_event_button_label">Записаться на встречу</string>
+    <string name="free_places_label">Всего %1$s мест. Если передумаете — отпишитесь</string>
+    <string name="interests_label">Расскажите о своих интересах, чтобы мы рекомендовали полезные встречи</string>
+    <string name="interests_button_label">Выбрать интересы</string>
+    <string name="find_events_hint">Найти встречи и сообщества</string>
+    <string name="cancel">Отмена</string>
+    <string name="nearest_events">Ближайшие встречи</string>
+    <string name="other_events">Другие встречи</string>
+    <string name="other_events_of_group">Другие встречи сообщества</string>
+    <string name="organizer_label">Организатор</string>
+    <string name="speaker">Ведущий</string>
+    <string name="are_going_to_event">Пойдут на встречу</string>
 
     <plurals name="people_plurals">
         <item quantity="zero">%1$d человек</item>

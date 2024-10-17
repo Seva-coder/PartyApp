@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -72,6 +73,8 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.androidx.core.splashscreen)
 
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
     // koin
     implementation(libs.koin.core)
     implementation(libs.koin.android)
@@ -81,5 +84,6 @@ dependencies {
     //modules
     implementation(project(path = ":domain"))
     implementation(project(path = ":repository"))
+    debugImplementation(libs.androidx.ui.tooling)
 
 }

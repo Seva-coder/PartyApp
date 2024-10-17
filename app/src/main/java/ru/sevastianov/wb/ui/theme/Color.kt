@@ -20,6 +20,16 @@ data class ColorTheme(
     val darkTextColor: Color,
     val avaBorderColor: Color,
     val statusColor: Color,
+    val newDarkColor: Color,
+    val newWhiteColor: Color,
+    val newGreyColor: Color,
+    val newGreyColor2: Color,
+    val newMainColor: Color,
+    val notSelectedColor: Color,
+    val pinkButton: Color,
+    val errorColor: Color,
+    val uncheckedTrackColor: Color,
+    val greenColor: Color
 )
 
 val LightScheme = ColorTheme(
@@ -35,7 +45,17 @@ val LightScheme = ColorTheme(
     darkTextColor = Color(0xFF29183B),
     avaBorderColor = Color(0xFFD2D5F9),
     statusColor = Color(0xFF2CC069),
-    greyTextColor3 = Color(0xFF666666)
+    greyTextColor3 = Color(0xFF666666),
+    newDarkColor = Color(0xFF000000),
+    newGreyColor = Color(0xFF76778E),
+    newGreyColor2 = Color(0xFF9797AF),
+    newMainColor = Color(0xFF9A10F0),
+    notSelectedColor = Color(0xFFF6F6FA),
+    pinkButton = Color(0xFFE7C3DF),
+    newWhiteColor = Color(0xFFFFFFFF),
+    errorColor = Color(0xFFFFEEF4),
+    uncheckedTrackColor = Color(0xFFEFEFEF),
+    greenColor = Color(0xFF00BF59)
 )
 
 val DarkScheme = ColorTheme(
@@ -51,7 +71,17 @@ val DarkScheme = ColorTheme(
     darkTextColor = Color(0xFFD6C4E9),
     avaBorderColor = Color(0xFFD2D5F9),
     statusColor = Color(0xFF2CC069),
-    greyTextColor3 = Color(0xFF666666)
+    greyTextColor3 = Color(0xFF666666),
+    newDarkColor = Color(0xFFF0F0F0),
+    newGreyColor = Color(0xFF76778E),
+    newGreyColor2 = Color(0xFF9797AF),
+    newMainColor = Color(0xFF9A10F0),
+    notSelectedColor = Color(0xFFF6F6FA),
+    pinkButton = Color(0xFFE7C3DF),
+    newWhiteColor = Color(0xFFFFFFFF),
+    errorColor = Color(0xFFFFEEF4),
+    uncheckedTrackColor = Color(0xFFEFEFEF),
+    greenColor = Color(0xFF00BF59)
 )
 
 val LocalLightColorScheme = staticCompositionLocalOf {

@@ -26,10 +26,10 @@ class GroupsStubRepository : IGroupsRepository {
 
     override fun getEventsOfGroup(groupId: Long): Flow<List<Event>> {
         val event = Event(
+            eventId = 1L,
             title = "Developer meeting",
             place = "Москва",
             date = 3456780,
-            isEnded = false,
             imageUrl = "https://live.staticflickr.com/65535/53843567021_ae8d29049f_o_d.png",
             tags = listOf("Python", "Junior", "Moscow")
         )
@@ -39,8 +39,15 @@ class GroupsStubRepository : IGroupsRepository {
 
     override fun getGroupDescription(groupId: Long): Flow<GroupDescription> {
         val groupDescription = GroupDescription(
-            description = "Description \n \n \n Description"
+            name = "",
+            imageUrl = "",
+            description = "Description \n \n \n Description",
+            subscribed = false
         )
         return flowOf(groupDescription)
+    }
+
+    override fun getGroupDescriptionByEventId(eventId: Long): Flow<GroupDescription> {
+        return flowOf()
     }
 }

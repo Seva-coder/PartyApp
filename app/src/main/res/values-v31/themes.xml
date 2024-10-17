@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
-    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <!-- Set the splash screen background, animated icon, and animation
-        duration. -->
-        <item name="windowSplashScreenBackground">@color/neutralWhite</item>
+    <style name="Theme.PartyApp" parent="android:Theme.Material.Light.NoActionBar" />
 
-        <!-- Use windowSplashScreenAnimatedIcon to add a drawable or an animated
-             drawable. One of these is required. -->
-        <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_anim</item>
-        <!-- Required for animated icons. -->
-        <item name="windowSplashScreenAnimationDuration">2000</item>
+    <!--    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+            &lt;!&ndash; Set the splash screen background, animated icon, and animation
+            duration. &ndash;&gt;
+            <item name="windowSplashScreenBackground">@color/neutralWhite</item>
 
-        <!-- Set the theme of the Activity that directly follows your splash
-        screen. This is required. -->
-        <item name="postSplashScreenTheme">@style/Theme.PartyApp</item>
+            &lt;!&ndash; Use windowSplashScreenAnimatedIcon to add a drawable or an animated
+                 drawable. One of these is required. &ndash;&gt;
+            <item name="android:windowSplashScreenAnimatedIcon">@drawable/splash_anim</item>
+            &lt;!&ndash; Required for animated icons. &ndash;&gt;
+            <item name="windowSplashScreenAnimationDuration">2000</item>
+
+            &lt;!&ndash; Set the theme of the Activity that directly follows your splash
+            screen. This is required. &ndash;&gt;
+            <item name="postSplashScreenTheme">@style/Theme.PartyApp</item>-->
 
 
-    </style>
+    <!--</style>-->
 </resources>
